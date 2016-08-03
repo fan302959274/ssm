@@ -1,4 +1,4 @@
-package com.tcz.api.config;
+package com.tcz.api;
 
 
 import org.springframework.boot.SpringApplication;
