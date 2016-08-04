@@ -1,9 +1,14 @@
 package com.tcz.api.controller;
 
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tcz.api.model.po.Item;
 import com.tcz.api.service.ItemService;
 import com.tcz.core.rest.Message;
 
@@ -17,6 +22,8 @@ import com.tcz.core.rest.Message;
 @RequestMapping("/item")
 public class ItemController {
 	
+	private Logger log = LoggerFactory.getLogger(getClass());
+	
 	@Autowired
 	private ItemService itemService;
 	
@@ -28,7 +35,8 @@ public class ItemController {
 	// 热门推荐
 	@RequestMapping("/hotItems")
 	public Message hotItems(){
-		return Message.success(itemService.hotItems());
+		List<Item> items =  itemService.hotItems();
+		return Message.success(items); 
 	}
 	
 	// 即将揭晓
