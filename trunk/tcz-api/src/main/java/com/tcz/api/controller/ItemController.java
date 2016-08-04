@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tcz.api.model.po.Item;
 import com.tcz.api.model.vo.HotItem;
 import com.tcz.api.service.ItemService;
 import com.tcz.core.rest.Message;
