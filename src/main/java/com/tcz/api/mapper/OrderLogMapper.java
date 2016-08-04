@@ -1,6 +1,6 @@
 package com.tcz.api.mapper;
 
-import com.tcz.api.model.OrderLog;
+import com.tcz.api.model.po.OrderLog;
 
 public interface OrderLogMapper {
     /**

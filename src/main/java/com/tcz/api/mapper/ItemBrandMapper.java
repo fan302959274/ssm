@@ -1,6 +1,6 @@
 package com.tcz.api.mapper;
 
-import com.tcz.api.model.ItemBrand;
+import com.tcz.api.model.po.ItemBrand;
 
 public interface ItemBrandMapper {
     int deleteByPrimaryKey(Long id);

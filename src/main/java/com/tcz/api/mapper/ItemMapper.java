@@ -2,7 +2,7 @@ package com.tcz.api.mapper;
 
 import java.util.List;
 
-import com.tcz.api.model.Item;
+import com.tcz.api.model.po.Item;
 
 public interface ItemMapper {
     int deleteByPrimaryKey(Long id);

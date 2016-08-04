@@ -6,7 +6,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Configuration
-@ComponentScan(basePackages = { "com.tcz.cms.controller" , "com.tcz.cms.plugin"})
+@ComponentScan(basePackages = { "com.tcz.api.controller"})
 @EnableWebMvc
 public class WebConfig extends WebMvcConfigurerAdapter{
 	

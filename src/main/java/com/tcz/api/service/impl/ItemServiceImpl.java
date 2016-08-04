@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tcz.api.mapper.ItemMapper;
-import com.tcz.api.model.Item;
+import com.tcz.api.model.po.Item;
 import com.tcz.api.service.ItemService;
 
 @Service

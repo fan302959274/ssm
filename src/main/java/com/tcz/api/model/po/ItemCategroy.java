@@ -1,15 +1,21 @@
-package com.tcz.api.model;
+package com.tcz.api.model.po;
 
 import java.util.Date;
 
-public class ItemBrand {
+public class ItemCategroy {
     private Long id;
 
     /** 名称 */
     private String name;
 
-    /** 品牌logo */
-    private String logo;
+    /** 树路径 */
+    private String treePath;
+
+    /** 等级 */
+    private Integer grade;
+
+    /** 父ID*/
+    private Long parentId;
 
     /** 创建日期 */
     private Date createDate;
@@ -33,12 +39,28 @@ public class ItemBrand {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getLogo() {
-        return logo;
+    public String getTreePath() {
+        return treePath;
     }
 
-    public void setLogo(String logo) {
-        this.logo = logo == null ? null : logo.trim();
+    public void setTreePath(String treePath) {
+        this.treePath = treePath == null ? null : treePath.trim();
+    }
+
+    public Integer getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Integer grade) {
+        this.grade = grade;
+    }
+
+    public Long getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
     }
 
     public Date getCreateDate() {
