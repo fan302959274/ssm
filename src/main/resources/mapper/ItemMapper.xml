@@ -17,7 +17,7 @@
     <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
     <result column="modify_date" property="modifyDate" jdbcType="TIMESTAMP" />
   </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.tcz.api.model.Item" extends="BaseResultMap" >
+  <resultMap id="ResultMapWithBLOBs" type="com.tcz.api.model.po.Item" extends="BaseResultMap" >
     <result column="introduction" property="introduction" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
@@ -39,7 +39,7 @@
     delete from tcz_item
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.tcz.api.model.Item" >
+  <insert id="insert" parameterType="com.tcz.api.model.po.Item" >
     insert into tcz_item (id, brand_id, category_id, 
       sn, name, image, cost, 
       sales, price, periods, 
@@ -51,7 +51,7 @@
       #{maxPeriods,jdbcType=INTEGER}, #{isMarketable,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
       #{modifyDate,jdbcType=TIMESTAMP}, #{introduction,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.tcz.api.model.Item" >
+  <insert id="insertSelective" parameterType="com.tcz.api.model.po.Item" >
     insert into tcz_item
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -148,7 +148,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.tcz.api.model.Item" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.tcz.api.model.po.Item" >
     update tcz_item
     <set >
       <if test="brandId != null" >
@@ -196,7 +196,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.tcz.api.model.Item" >
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.tcz.api.model.po.Item" >
     update tcz_item
     set brand_id = #{brandId,jdbcType=BIGINT},
       category_id = #{categoryId,jdbcType=BIGINT},
@@ -214,7 +214,7 @@
       introduction = #{introduction,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.tcz.api.model.Item" >
+  <update id="updateByPrimaryKey" parameterType="com.tcz.api.model.po.Item" >
     update tcz_item
     set brand_id = #{brandId,jdbcType=BIGINT},
       category_id = #{categoryId,jdbcType=BIGINT},

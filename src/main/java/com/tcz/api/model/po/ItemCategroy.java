@@ -5,22 +5,16 @@ import java.util.Date;
 public class ItemCategroy {
     private Long id;
 
-    /** 名称 */
     private String name;
 
-    /** 树路径 */
     private String treePath;
 
-    /** 等级 */
     private Integer grade;
 
-    /** 父ID*/
     private Long parentId;
 
-    /** 创建日期 */
     private Date createDate;
 
-    /** 修改日期 */
     private Date modifyDate;
 
     public Long getId() {
