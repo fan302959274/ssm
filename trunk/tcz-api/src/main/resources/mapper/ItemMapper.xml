@@ -1,0 +1,694 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tcz.api.mapper.ItemMapper">
+  <resultMap id="BaseResultMap" type="com.tcz.api.model.Item">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="brand_id" jdbcType="BIGINT" property="brandId" />
+    <result column="category_id" jdbcType="BIGINT" property="categoryId" />
+    <result column="sn" jdbcType="VARCHAR" property="sn" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="cost" jdbcType="DECIMAL" property="cost" />
+    <result column="sales" jdbcType="INTEGER" property="sales" />
+    <result column="price" jdbcType="INTEGER" property="price" />
+    <result column="periods" jdbcType="INTEGER" property="periods" />
+    <result column="max_periods" jdbcType="INTEGER" property="maxPeriods" />
+    <result column="is_marketable" jdbcType="VARCHAR" property="isMarketable" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="modify_date" jdbcType="TIMESTAMP" property="modifyDate" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.tcz.api.model.Item">
+    <result column="introduction" jdbcType="LONGVARCHAR" property="introduction" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, brand_id, category_id, sn, name, image, cost, sales, price, periods, max_periods, 
+    is_marketable, create_date, modify_date
+  </sql>
+  <sql id="Blob_Column_List">
+    introduction
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tcz_item
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from tcz_item
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.tcz.api.model.Item">
+    insert into tcz_item (id, brand_id, category_id, 
+      sn, name, image, cost, 
+      sales, price, periods, 
+      max_periods, is_marketable, create_date, 
+      modify_date, introduction)
+    values (#{id,jdbcType=BIGINT}, #{brandId,jdbcType=BIGINT}, #{categoryId,jdbcType=BIGINT}, 
+      #{sn,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, #{cost,jdbcType=DECIMAL}, 
+      #{sales,jdbcType=INTEGER}, #{price,jdbcType=INTEGER}, #{periods,jdbcType=INTEGER}, 
+      #{maxPeriods,jdbcType=INTEGER}, #{isMarketable,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{modifyDate,jdbcType=TIMESTAMP}, #{introduction,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tcz.api.model.Item">
+    insert into tcz_item
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="brandId != null">
+        brand_id,
+      </if>
+      <if test="categoryId != null">
+        category_id,
+      </if>
+      <if test="sn != null">
+        sn,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="image != null">
+        image,
+      </if>
+      <if test="cost != null">
+        cost,
+      </if>
+      <if test="sales != null">
+        sales,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="periods != null">
+        periods,
+      </if>
+      <if test="maxPeriods != null">
+        max_periods,
+      </if>
+      <if test="isMarketable != null">
+        is_marketable,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="modifyDate != null">
+        modify_date,
+      </if>
+      <if test="introduction != null">
+        introduction,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="brandId != null">
+        #{brandId,jdbcType=BIGINT},
+      </if>
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=BIGINT},
+      </if>
+      <if test="sn != null">
+        #{sn,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="cost != null">
+        #{cost,jdbcType=DECIMAL},
+      </if>
+      <if test="sales != null">
+        #{sales,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=INTEGER},
+      </if>
+      <if test="periods != null">
+        #{periods,jdbcType=INTEGER},
+      </if>
+      <if test="maxPeriods != null">
+        #{maxPeriods,jdbcType=INTEGER},
+      </if>
+      <if test="isMarketable != null">
+        #{isMarketable,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyDate != null">
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="introduction != null">
+        #{introduction,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tcz.api.model.Item">
+    update tcz_item
+    <set>
+      <if test="brandId != null">
+        brand_id = #{brandId,jdbcType=BIGINT},
+      </if>
+      <if test="categoryId != null">
+        category_id = #{categoryId,jdbcType=BIGINT},
+      </if>
+      <if test="sn != null">
+        sn = #{sn,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="cost != null">
+        cost = #{cost,jdbcType=DECIMAL},
+      </if>
+      <if test="sales != null">
+        sales = #{sales,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=INTEGER},
+      </if>
+      <if test="periods != null">
+        periods = #{periods,jdbcType=INTEGER},
+      </if>
+      <if test="maxPeriods != null">
+        max_periods = #{maxPeriods,jdbcType=INTEGER},
+      </if>
+      <if test="isMarketable != null">
+        is_marketable = #{isMarketable,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyDate != null">
+        modify_date = #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="introduction != null">
+        introduction = #{introduction,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.tcz.api.model.Item">
+    update tcz_item
+    set brand_id = #{brandId,jdbcType=BIGINT},
+      category_id = #{categoryId,jdbcType=BIGINT},
+      sn = #{sn,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      cost = #{cost,jdbcType=DECIMAL},
+      sales = #{sales,jdbcType=INTEGER},
+      price = #{price,jdbcType=INTEGER},
+      periods = #{periods,jdbcType=INTEGER},
+      max_periods = #{maxPeriods,jdbcType=INTEGER},
+      is_marketable = #{isMarketable,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      modify_date = #{modifyDate,jdbcType=TIMESTAMP},
+      introduction = #{introduction,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tcz.api.model.Item">
+    update tcz_item
+    set brand_id = #{brandId,jdbcType=BIGINT},
+      category_id = #{categoryId,jdbcType=BIGINT},
+      sn = #{sn,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      cost = #{cost,jdbcType=DECIMAL},
+      sales = #{sales,jdbcType=INTEGER},
+      price = #{price,jdbcType=INTEGER},
+      periods = #{periods,jdbcType=INTEGER},
+      max_periods = #{maxPeriods,jdbcType=INTEGER},
+      is_marketable = #{isMarketable,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      modify_date = #{modifyDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.tcw.api.model.Item">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="brand_id" jdbcType="BIGINT" property="brandId" />
+    <result column="category_id" jdbcType="BIGINT" property="categoryId" />
+    <result column="sn" jdbcType="VARCHAR" property="sn" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="cost" jdbcType="DECIMAL" property="cost" />
+    <result column="sales" jdbcType="INTEGER" property="sales" />
+    <result column="price" jdbcType="INTEGER" property="price" />
+    <result column="periods" jdbcType="INTEGER" property="periods" />
+    <result column="max_periods" jdbcType="INTEGER" property="maxPeriods" />
+    <result column="is_marketable" jdbcType="VARCHAR" property="isMarketable" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="modify_date" jdbcType="TIMESTAMP" property="modifyDate" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.tcw.api.model.Item">
+    <result column="introduction" jdbcType="LONGVARCHAR" property="introduction" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, brand_id, category_id, sn, name, image, cost, sales, price, periods, max_periods, 
+    is_marketable, create_date, modify_date
+  </sql>
+  <sql id="Blob_Column_List">
+    introduction
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tcz_item
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from tcz_item
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.tcw.api.model.Item">
+    insert into tcz_item (id, brand_id, category_id, 
+      sn, name, image, cost, 
+      sales, price, periods, 
+      max_periods, is_marketable, create_date, 
+      modify_date, introduction)
+    values (#{id,jdbcType=BIGINT}, #{brandId,jdbcType=BIGINT}, #{categoryId,jdbcType=BIGINT}, 
+      #{sn,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, #{cost,jdbcType=DECIMAL}, 
+      #{sales,jdbcType=INTEGER}, #{price,jdbcType=INTEGER}, #{periods,jdbcType=INTEGER}, 
+      #{maxPeriods,jdbcType=INTEGER}, #{isMarketable,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{modifyDate,jdbcType=TIMESTAMP}, #{introduction,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tcw.api.model.Item">
+    insert into tcz_item
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="brandId != null">
+        brand_id,
+      </if>
+      <if test="categoryId != null">
+        category_id,
+      </if>
+      <if test="sn != null">
+        sn,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="image != null">
+        image,
+      </if>
+      <if test="cost != null">
+        cost,
+      </if>
+      <if test="sales != null">
+        sales,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="periods != null">
+        periods,
+      </if>
+      <if test="maxPeriods != null">
+        max_periods,
+      </if>
+      <if test="isMarketable != null">
+        is_marketable,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="modifyDate != null">
+        modify_date,
+      </if>
+      <if test="introduction != null">
+        introduction,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="brandId != null">
+        #{brandId,jdbcType=BIGINT},
+      </if>
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=BIGINT},
+      </if>
+      <if test="sn != null">
+        #{sn,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="cost != null">
+        #{cost,jdbcType=DECIMAL},
+      </if>
+      <if test="sales != null">
+        #{sales,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=INTEGER},
+      </if>
+      <if test="periods != null">
+        #{periods,jdbcType=INTEGER},
+      </if>
+      <if test="maxPeriods != null">
+        #{maxPeriods,jdbcType=INTEGER},
+      </if>
+      <if test="isMarketable != null">
+        #{isMarketable,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyDate != null">
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="introduction != null">
+        #{introduction,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tcw.api.model.Item">
+    update tcz_item
+    <set>
+      <if test="brandId != null">
+        brand_id = #{brandId,jdbcType=BIGINT},
+      </if>
+      <if test="categoryId != null">
+        category_id = #{categoryId,jdbcType=BIGINT},
+      </if>
+      <if test="sn != null">
+        sn = #{sn,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="cost != null">
+        cost = #{cost,jdbcType=DECIMAL},
+      </if>
+      <if test="sales != null">
+        sales = #{sales,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=INTEGER},
+      </if>
+      <if test="periods != null">
+        periods = #{periods,jdbcType=INTEGER},
+      </if>
+      <if test="maxPeriods != null">
+        max_periods = #{maxPeriods,jdbcType=INTEGER},
+      </if>
+      <if test="isMarketable != null">
+        is_marketable = #{isMarketable,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyDate != null">
+        modify_date = #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="introduction != null">
+        introduction = #{introduction,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.tcw.api.model.Item">
+    update tcz_item
+    set brand_id = #{brandId,jdbcType=BIGINT},
+      category_id = #{categoryId,jdbcType=BIGINT},
+      sn = #{sn,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      cost = #{cost,jdbcType=DECIMAL},
+      sales = #{sales,jdbcType=INTEGER},
+      price = #{price,jdbcType=INTEGER},
+      periods = #{periods,jdbcType=INTEGER},
+      max_periods = #{maxPeriods,jdbcType=INTEGER},
+      is_marketable = #{isMarketable,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      modify_date = #{modifyDate,jdbcType=TIMESTAMP},
+      introduction = #{introduction,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tcw.api.model.Item">
+    update tcz_item
+    set brand_id = #{brandId,jdbcType=BIGINT},
+      category_id = #{categoryId,jdbcType=BIGINT},
+      sn = #{sn,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      cost = #{cost,jdbcType=DECIMAL},
+      sales = #{sales,jdbcType=INTEGER},
+      price = #{price,jdbcType=INTEGER},
+      periods = #{periods,jdbcType=INTEGER},
+      max_periods = #{maxPeriods,jdbcType=INTEGER},
+      is_marketable = #{isMarketable,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      modify_date = #{modifyDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.tcw.api.model.Item">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="brand_id" jdbcType="BIGINT" property="brandId" />
+    <result column="category_id" jdbcType="BIGINT" property="categoryId" />
+    <result column="sn" jdbcType="VARCHAR" property="sn" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="cost" jdbcType="DECIMAL" property="cost" />
+    <result column="sales" jdbcType="INTEGER" property="sales" />
+    <result column="price" jdbcType="INTEGER" property="price" />
+    <result column="periods" jdbcType="INTEGER" property="periods" />
+    <result column="max_periods" jdbcType="INTEGER" property="maxPeriods" />
+    <result column="is_marketable" jdbcType="VARCHAR" property="isMarketable" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="modify_date" jdbcType="TIMESTAMP" property="modifyDate" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.tcw.api.model.Item">
+    <result column="introduction" jdbcType="LONGVARCHAR" property="introduction" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, brand_id, category_id, sn, name, image, cost, sales, price, periods, max_periods, 
+    is_marketable, create_date, modify_date
+  </sql>
+  <sql id="Blob_Column_List">
+    introduction
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tcz_item
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from tcz_item
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.tcw.api.model.Item">
+    insert into tcz_item (id, brand_id, category_id, 
+      sn, name, image, cost, 
+      sales, price, periods, 
+      max_periods, is_marketable, create_date, 
+      modify_date, introduction)
+    values (#{id,jdbcType=BIGINT}, #{brandId,jdbcType=BIGINT}, #{categoryId,jdbcType=BIGINT}, 
+      #{sn,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, #{cost,jdbcType=DECIMAL}, 
+      #{sales,jdbcType=INTEGER}, #{price,jdbcType=INTEGER}, #{periods,jdbcType=INTEGER}, 
+      #{maxPeriods,jdbcType=INTEGER}, #{isMarketable,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{modifyDate,jdbcType=TIMESTAMP}, #{introduction,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.tcw.api.model.Item">
+    insert into tcz_item
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="brandId != null">
+        brand_id,
+      </if>
+      <if test="categoryId != null">
+        category_id,
+      </if>
+      <if test="sn != null">
+        sn,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="image != null">
+        image,
+      </if>
+      <if test="cost != null">
+        cost,
+      </if>
+      <if test="sales != null">
+        sales,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="periods != null">
+        periods,
+      </if>
+      <if test="maxPeriods != null">
+        max_periods,
+      </if>
+      <if test="isMarketable != null">
+        is_marketable,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="modifyDate != null">
+        modify_date,
+      </if>
+      <if test="introduction != null">
+        introduction,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="brandId != null">
+        #{brandId,jdbcType=BIGINT},
+      </if>
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=BIGINT},
+      </if>
+      <if test="sn != null">
+        #{sn,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="cost != null">
+        #{cost,jdbcType=DECIMAL},
+      </if>
+      <if test="sales != null">
+        #{sales,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=INTEGER},
+      </if>
+      <if test="periods != null">
+        #{periods,jdbcType=INTEGER},
+      </if>
+      <if test="maxPeriods != null">
+        #{maxPeriods,jdbcType=INTEGER},
+      </if>
+      <if test="isMarketable != null">
+        #{isMarketable,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyDate != null">
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="introduction != null">
+        #{introduction,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tcw.api.model.Item">
+    update tcz_item
+    <set>
+      <if test="brandId != null">
+        brand_id = #{brandId,jdbcType=BIGINT},
+      </if>
+      <if test="categoryId != null">
+        category_id = #{categoryId,jdbcType=BIGINT},
+      </if>
+      <if test="sn != null">
+        sn = #{sn,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null">
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="cost != null">
+        cost = #{cost,jdbcType=DECIMAL},
+      </if>
+      <if test="sales != null">
+        sales = #{sales,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=INTEGER},
+      </if>
+      <if test="periods != null">
+        periods = #{periods,jdbcType=INTEGER},
+      </if>
+      <if test="maxPeriods != null">
+        max_periods = #{maxPeriods,jdbcType=INTEGER},
+      </if>
+      <if test="isMarketable != null">
+        is_marketable = #{isMarketable,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyDate != null">
+        modify_date = #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="introduction != null">
+        introduction = #{introduction,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.tcw.api.model.Item">
+    update tcz_item
+    set brand_id = #{brandId,jdbcType=BIGINT},
+      category_id = #{categoryId,jdbcType=BIGINT},
+      sn = #{sn,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      cost = #{cost,jdbcType=DECIMAL},
+      sales = #{sales,jdbcType=INTEGER},
+      price = #{price,jdbcType=INTEGER},
+      periods = #{periods,jdbcType=INTEGER},
+      max_periods = #{maxPeriods,jdbcType=INTEGER},
+      is_marketable = #{isMarketable,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      modify_date = #{modifyDate,jdbcType=TIMESTAMP},
+      introduction = #{introduction,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tcw.api.model.Item">
+    update tcz_item
+    set brand_id = #{brandId,jdbcType=BIGINT},
+      category_id = #{categoryId,jdbcType=BIGINT},
+      sn = #{sn,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      cost = #{cost,jdbcType=DECIMAL},
+      sales = #{sales,jdbcType=INTEGER},
+      price = #{price,jdbcType=INTEGER},
+      periods = #{periods,jdbcType=INTEGER},
+      max_periods = #{maxPeriods,jdbcType=INTEGER},
+      is_marketable = #{isMarketable,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      modify_date = #{modifyDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
