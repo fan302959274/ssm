@@ -6,6 +6,7 @@ CREATE TABLE tcz.tcz_item (
   category_id bigint(20) NOT NULL COMMENT '商品分类',
   sn varchar(36) NOT NULL DEFAULT '' COMMENT '商品编号',
   name varchar(255) NOT NULL DEFAULT '' COMMENT '商品名称',
+  title varchar(255) NOT NULL DEFAULT '' COMMENT '商品标题',
   image varchar(255) NOT NULL DEFAULT '' COMMENT '展现图片',
   cost decimal(20, 4) NOT NULL DEFAULT 0.0000 COMMENT '商品成本',
   sales int(10) NOT NULL DEFAULT 0 COMMENT '已销售金额',
