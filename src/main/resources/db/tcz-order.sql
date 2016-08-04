@@ -1,8 +1,6 @@
-
-
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2016/8/4 星期四 16:38:49                        */
+/* Created on:     2016/8/4 星期四 18:07:02                        */
 /*==============================================================*/
 
 
@@ -35,7 +33,6 @@ create table tcz_order
    create_time          datetime not null,
    modify_time          datetime not null,
    delete_flag          varchar(1) not null default '0' comment '可用标识 0可用 ,1删除',
-   item_count           int(10) not null default 0 comment '商品数量',
    pay_amount           decimal(10) comment '实付金额',
    pay_status           varchar(1) not null default '0' comment '支付状态 0:未支付，1已支付',
    evaluate_level       varchar(1) comment '评价等级 0差评，1中评，2好评',
@@ -44,6 +41,7 @@ create table tcz_order
    member_id            bigint(30) comment '会员id',
    freight              decimal(10) comment '运费',
    coupon_discount      decimal(10) comment '折扣金额',
+   period               bigint(10) not null comment '期数',
    primary key (id)
 );
 
