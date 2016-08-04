@@ -1,6 +1,6 @@
 package com.tcz.api.mapper;
 
-import com.tcz.api.model.ItemCategroy;
+import com.tcz.api.model.po.ItemCategroy;
 
 public interface ItemCategroyMapper {
     int deleteByPrimaryKey(Long id);

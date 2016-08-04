@@ -1,4 +1,4 @@
-package com.tcz.api.model;
+package com.tcz.api.model.po;
 
 import java.util.Date;
 

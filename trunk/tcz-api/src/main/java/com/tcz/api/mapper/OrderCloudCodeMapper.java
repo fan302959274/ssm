@@ -1,6 +1,6 @@
 package com.tcz.api.mapper;
 
-import com.tcz.api.model.OrderCloudCode;
+import com.tcz.api.model.po.OrderCloudCode;
 
 public interface OrderCloudCodeMapper {
     /**

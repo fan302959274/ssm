@@ -1,6 +1,6 @@
 package com.tcz.api.mapper;
 
-import com.tcz.api.model.Tag;
+import com.tcz.api.model.po.Tag;
 
 public interface TagMapper {
     int deleteByPrimaryKey(Long id);

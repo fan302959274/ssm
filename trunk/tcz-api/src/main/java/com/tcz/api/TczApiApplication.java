@@ -17,7 +17,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableTransactionManagement 
 @EnableWebMvc
 @EnableCaching
-@ComponentScan(basePackages = {"com.tcz.cms"}, excludeFilters = {@Filter(type = FilterType.ANNOTATION, value = Controller.class)})
+@ComponentScan(basePackages = {"com.tcz.api"}, excludeFilters = {@Filter(type = FilterType.ANNOTATION, value = Controller.class)})
 public class TczApiApplication {
     
 	public static void main(String[] args) throws Exception {
