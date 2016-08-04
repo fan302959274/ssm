@@ -2,6 +2,8 @@ package com.tcz.api.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +22,8 @@ import com.tcz.core.rest.Message;
 @RequestMapping("/item")
 public class ItemController {
 	
+	private Logger log = LoggerFactory.getLogger(getClass());
+	
 	@Autowired
 	private ItemService itemService;
 	
@@ -31,7 +35,13 @@ public class ItemController {
 	// 热门推荐
 	@RequestMapping("/hotItems")
 	public Message hotItems(){
-		List<HotItem> items =  itemService.hotItems();
+		List<HotItem> items = null;
+		try {
+			items =  itemService.hotItems();
+		} catch (Exception e) {
+			log.error(e.getMessage() , e);
+			return Message.error();
+		}
 		return Message.success(items); 
 	}
 	
