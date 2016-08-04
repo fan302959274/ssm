@@ -1,5 +1,7 @@
 package com.tcz.api.mapper;
 
+import java.util.List;
+
 import com.tcz.api.model.Item;
 
 public interface ItemMapper {
@@ -16,4 +18,6 @@ public interface ItemMapper {
     int updateByPrimaryKeyWithBLOBs(Item record);
 
     int updateByPrimaryKey(Item record);
+    
+    List<Item> hotItems();
 }

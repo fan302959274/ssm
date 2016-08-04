@@ -3,6 +3,8 @@ package com.tcz.api.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tcz.core.rest.Message;
+
 /**
  * Controller - 商品
  * 
@@ -14,8 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class ItemController {
 	
 	// 正在揭晓
-	public void raffleItems(){
+	public Message raffleItems(){
 		
+		return Message.success(null);
 	}
 
 	// 热门推荐
