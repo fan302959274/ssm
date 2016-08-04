@@ -5,13 +5,10 @@ import java.util.Date;
 public class Tag {
     private Long id;
 
-    /** 标签名称 */
     private String name;
 
-    /** 创建日期 */
     private Date createDate;
 
-    /** 修改日期 */
     private Date modifyDate;
 
     public Long getId() {

@@ -5,16 +5,12 @@ import java.util.Date;
 public class ItemBrand {
     private Long id;
 
-    /** 名称 */
     private String name;
 
-    /** 品牌logo */
     private String logo;
 
-    /** 创建日期 */
     private Date createDate;
 
-    /** 修改日期 */
     private Date modifyDate;
 
     public Long getId() {

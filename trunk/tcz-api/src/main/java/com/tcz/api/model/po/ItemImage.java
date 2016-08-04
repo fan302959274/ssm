@@ -5,31 +5,22 @@ import java.util.Date;
 public class ItemImage {
     private Long id;
 
-    /** 商品ID */
     private Long itemId;
 
-    /** 标题 */
     private String title;
 
-    /** 原图 */
     private String source;
 
-    /** 大图 */
     private String large;
 
-    /** 中图 */
     private String medium;
 
-    /** 小图 */
     private String thumbnail;
 
-    /** 顺序 */
     private Integer order;
 
-    /** 创建日期 */
     private Date createDate;
 
-    /** 修改日期*/
     private Date modifyDate;
 
     public Long getId() {
