@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tcz.api.model.po.Item;
+import com.tcz.api.model.vo.HotItem;
 import com.tcz.api.service.ItemService;
 import com.tcz.core.rest.Message;
 
@@ -31,7 +32,7 @@ public class ItemController {
 	// 热门推荐
 	@RequestMapping("/hotItems")
 	public Message hotItems(){
-		List<Item> items =  itemService.hotItems();
+		List<HotItem> items =  itemService.hotItems();
 		return Message.success(items); 
 	}
 	
