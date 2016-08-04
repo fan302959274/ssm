@@ -17,6 +17,9 @@ public class Item {
 
     /** 名称 */
     private String name;
+    
+    /** 标题 */
+    private String title;
 
     /** 展现图片*/
     private String image;
@@ -167,4 +170,12 @@ public class Item {
     public void setIntroduction(String introduction) {
         this.introduction = introduction == null ? null : introduction.trim();
     }
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
 }
