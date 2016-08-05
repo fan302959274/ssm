@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2016/8/4 星期四 18:20:12                        */
+/* Created on:     2016/8/5 星期五 8:36:31                         */
 /*==============================================================*/
 
 
@@ -39,9 +39,9 @@ create table tcz_order
    evaluate_content     longtext comment '评价内容',
    win_state            varchar(1) not null default '0' comment '中奖状态，0 未中奖 1中奖',
    member_id            bigint(30) comment '会员id',
-   freight              decimal(10,2) comment '运费',
-   coupon_discount      decimal(10,2) comment '折扣金额',
-   period               bigint(10) not null comment '期数',
+   freight              decimal(20,4) comment '运费',
+   coupon_discount      decimal(20,4) comment '折扣金额',
+   periods              bigint(10) not null comment '期数',
    primary key (id)
 );
 
@@ -72,7 +72,7 @@ create table tcz_order_detail
    order_id             bigint(30) not null comment '订单id',
    item_id              bigint(30) not null comment '商品id',
    order_code           varchar(30) not null comment '订单编号',
-   purchasel_price      decimal(10,2) not null default 0 comment '订购单价',
+   purchasel_price      decimal(20,4) not null default 0 comment '订购单价',
    create_time          datetime not null comment '创建日期',
    modify_time          datetime not null comment '修改日期',
    delete_flag          varchar(1) not null default '0' comment '删除标识',
