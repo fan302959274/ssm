@@ -129,7 +129,7 @@ public class Order {
     /**
      * 期数
      */
-    private Long period;
+    private Long periods;
 
     /**
      *
@@ -676,14 +676,14 @@ public class Order {
 	 * @return the period
 	 */
 	public Long getPeriod() {
-		return period;
+		return periods;
 	}
 
 	/**
 	 * @param period the period to set
 	 */
-	public void setPeriod(Long period) {
-		this.period = period;
+	public void setPeriod(Long periods) {
+		this.periods = periods;
 	}
     
 }
