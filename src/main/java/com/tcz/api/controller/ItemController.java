@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -69,6 +70,12 @@ public class ItemController {
 			return Message.error();
 		}
 		return Message.success(items);
+	}
+	
+	@RequestMapping("/findItems/{brandId}-{categoryId}-{property}-{direction}")
+	public Message findItems(@PathVariable("brandId")String brandId , @PathVariable("categoryId")String categoryId , 
+			@PathVariable("property")String property , @PathVariable("direction")String direction){
+		return Message.success(null);
 	}
 	
 }
