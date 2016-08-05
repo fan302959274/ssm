@@ -1,6 +1,6 @@
-package com.tcz.api.model.vo;
+package com.tcz.api.model.vo.item;
 
-public class HotItem {
+public class ItemVo {
 
 	private Long id;
 	

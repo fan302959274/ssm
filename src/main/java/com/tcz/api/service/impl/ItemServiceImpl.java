@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.tcz.api.mapper.ItemMapper;
 import com.tcz.api.model.po.Item;
-import com.tcz.api.model.vo.HotItem;
+import com.tcz.api.model.vo.item.ItemVo;
 import com.tcz.api.service.ItemService;
 
 @Service
@@ -19,11 +19,23 @@ public class ItemServiceImpl implements ItemService{
 	private ItemMapper itemMapper;
 
 	@Override
-	public List<HotItem> hotItems() {
+	public List<ItemVo> hotItems() {
 		List<Item> items = itemMapper.hotItems();
-		List<HotItem> hotItems = new ArrayList<>();
+		List<ItemVo> hotItems = new ArrayList<>();
 		for (int i = 0; i < items.size(); i++) {
-			HotItem hotItem = new HotItem();
+			ItemVo hotItem = new ItemVo();
+			BeanUtils.copyProperties(items.get(i), hotItem);
+			hotItems.add(hotItem);
+		}
+		return hotItems;
+	}
+
+	@Override
+	public List<ItemVo> soonItems() {
+		List<Item> items = itemMapper.soonItems();
+		List<ItemVo> hotItems = new ArrayList<>();
+		for (int i = 0; i < items.size(); i++) {
+			ItemVo hotItem = new ItemVo();
 			BeanUtils.copyProperties(items.get(i), hotItem);
 			hotItems.add(hotItem);
 		}
