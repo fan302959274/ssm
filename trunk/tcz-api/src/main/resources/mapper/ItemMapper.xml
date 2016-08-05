@@ -254,4 +254,13 @@
 	WHERE ti.id = tit.item_id
 	AND tit.tag_id = '4' AND ti.is_marketable = '1'
   </select>
+  
+  <select id="soonItems" resultMap="BaseResultMap">
+  	SELECT
+	  ti.id,ti.title,ti.image,ti.sales,ti.price
+	FROM tcz.tcz_item ti,
+	     tcz.tcz_item_tag tit
+	WHERE ti.id = tit.item_id
+	AND tit.tag_id = '2' AND ti.is_marketable = '1'
+  </select>
 </mapper>

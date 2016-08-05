@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tcz.api.model.vo.HotItem;
+import com.tcz.api.model.vo.item.ItemVo;
 import com.tcz.api.service.ItemService;
 import com.tcz.core.rest.Message;
 
@@ -35,7 +35,7 @@ public class ItemController {
 	// 热门推荐
 	@RequestMapping("/hotItems")
 	public Message hotItems(){
-		List<HotItem> items = null;
+		List<ItemVo> items = null;
 		try {
 			items =  itemService.hotItems();
 		} catch (Exception e) {
@@ -46,8 +46,16 @@ public class ItemController {
 	}
 	
 	// 即将揭晓
-	public void soonItems(){
-		
+	@RequestMapping("/soonItems")
+	public Message soonItems(){
+		List<ItemVo> items = null;
+		try {
+			items =  itemService.soonItems();
+		} catch (Exception e) {
+			log.error(e.getMessage() , e);
+			return Message.error();
+		}
+		return Message.success(null);
 	}
 	
 	// 新品上架
