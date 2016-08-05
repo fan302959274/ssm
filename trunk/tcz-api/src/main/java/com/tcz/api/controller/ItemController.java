@@ -55,12 +55,20 @@ public class ItemController {
 			log.error(e.getMessage() , e);
 			return Message.error();
 		}
-		return Message.success(null);
+		return Message.success(items);
 	}
 	
 	// 新品上架
-	public void newItems(){
-		
+	@RequestMapping("/newItems")
+	public Message newItems(){
+		List<ItemVo> items = null;
+		try {
+			items =  itemService.newItems();
+		} catch (Exception e) {
+			log.error(e.getMessage() , e);
+			return Message.error();
+		}
+		return Message.success(items);
 	}
 	
 }

@@ -10,4 +10,6 @@ public interface ItemService {
 
 	public List<ItemVo> soonItems();
 	
+	public List<ItemVo> newItems();
+	
 }

@@ -22,4 +22,6 @@ public interface ItemMapper {
     List<Item> hotItems();
 
 	List<Item> soonItems();
+
+	List<Item> newItems();
 }

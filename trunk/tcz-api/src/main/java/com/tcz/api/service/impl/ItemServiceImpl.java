@@ -35,9 +35,21 @@ public class ItemServiceImpl implements ItemService{
 		List<Item> items = itemMapper.soonItems();
 		List<ItemVo> hotItems = new ArrayList<>();
 		for (int i = 0; i < items.size(); i++) {
-			ItemVo hotItem = new ItemVo();
-			BeanUtils.copyProperties(items.get(i), hotItem);
-			hotItems.add(hotItem);
+			ItemVo soonItem = new ItemVo();
+			BeanUtils.copyProperties(items.get(i), soonItem);
+			hotItems.add(soonItem);
+		}
+		return hotItems;
+	}
+
+	@Override
+	public List<ItemVo> newItems() {
+		List<Item> items = itemMapper.soonItems();
+		List<ItemVo> hotItems = new ArrayList<>();
+		for (int i = 0; i < items.size(); i++) {
+			ItemVo newItem = new ItemVo();
+			BeanUtils.copyProperties(items.get(i), newItem);
+			hotItems.add(newItem);
 		}
 		return hotItems;
 	}
