@@ -19,18 +19,18 @@ drop table if exists tcz_plugin_config;
 create table tcz_order
 (
    id                   bigint(30) not null comment '订单id',
-   code                 varchar(50)  not null comment '订单编号',
+   sn              varchar(50)  not null comment '订单编号',
    status               varchar(1) not null default '0' comment '订单状态 0：未审核,1：已确认,2：已配货,3：已发货,4：已收货，5：已完成，6：待评价，7已关闭',
-   user_addressId       bigint(30) comment '收货人信息id',
-   address_Detail       varchar(255) comment '收货地址',
-   receive_Name         varchar(30) comment '收货人',
+   user_address_id       bigint(30) comment '收货人信息id',
+   address_detail       varchar(255) comment '收货地址',
+   receive_name         varchar(30) comment '收货人',
    receive_tell         varchar(30) comment '联系方式',
    zip_code             varchar(15) comment '邮编',
    ship_type            varchar(1) default '0' comment '配送方式',
    ship_no				varchar(50) default '' comment '配送单号',
-   pay_type             varchar(1) default '0' comment '支付类型',
+   plugin_config_id     varchar(1) default '0' comment '支付类型',
    is_Invoice           varchar(1) not null default '0' comment '是否开票',
-   invoice_Info         varchar(255) comment '开票信息',
+   invoice_info         varchar(255) comment '开票信息',
    comment              varchar(255) comment '备注',
    create_time          datetime not null,
    modify_time          datetime not null,
@@ -101,5 +101,5 @@ create table tcz_plugin_config
 	primary key(id)
 );
 
-alter table tcz_order_log comment '订单流水日志';
+alter table tcz_plugin_config comment '订单支付方式';
 
