@@ -27,6 +27,7 @@ create table tcz_order
    receive_tell         varchar(30) comment '联系方式',
    zip_code             varchar(15) comment '邮编',
    ship_type            varchar(1) default '0' comment '配送方式',
+   ship_no				varchar(50) default '' comment '配送单号',
    pay_type             varchar(1) default '0' comment '支付类型',
    is_Invoice           varchar(1) not null default '0' comment '是否开票',
    invoice_Info         varchar(255) comment '开票信息',
