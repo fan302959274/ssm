@@ -6,11 +6,12 @@
 
 drop table if exists tcz_order;
 
-drop table if exists tcz_order_cloudCode;
-
 drop table if exists tcz_order_detail;
 
 drop table if exists tcz_order_log;
+
+drop table if exists tcz_plugin_config;
+
 
 /*==============================================================*/
 /* Table: tcz_order                                             */
@@ -37,7 +38,6 @@ create table tcz_order
    pay_status           varchar(1) not null default '0' comment '支付状态 0:未支付，1已支付',
    evaluate_level       varchar(1) comment '评价等级 0差评，1中评，2好评',
    evaluate_content     longtext comment '评价内容',
-   win_state            varchar(1) not null default '0' comment '中奖状态，0 未中奖 1中奖',
    member_id            bigint(30) comment '会员id',
    freight              decimal(20,4) comment '运费',
    coupon_discount      decimal(20,4) comment '折扣金额',
@@ -47,21 +47,6 @@ create table tcz_order
 
 alter table tcz_order comment '订单表';
 
-/*==============================================================*/
-/* Table: tcz_order_cloudCode                                   */
-/*==============================================================*/
-create table tcz_order_cloudCode
-(
-   id                   bigint(30) not null,
-   order_id             bigint(30) not null comment '订单id',
-   cloud_code           varchar(50) comment '云购码',
-   create_time          datetime not null comment '创建时间',
-   modify_time          datetime not null comment '修改时间',
-   delete_flag          varchar(1) not null default '0' comment '删除标识',
-   primary key (id)
-);
-
-alter table tcz_order_cloudCode comment '订单云购码关联表';
 
 /*==============================================================*/
 /* Table: tcz_order_detail                                      */
@@ -76,7 +61,8 @@ create table tcz_order_detail
    create_time          datetime not null comment '创建日期',
    modify_time          datetime not null comment '修改日期',
    delete_flag          varchar(1) not null default '0' comment '删除标识',
-   count                int(10) not null default 0 comment '购买数量',
+   cloud_code           varchar(50) comment '云购码',
+   win_state            varchar(1) not null default '0' comment '中奖状态，0 未中奖 1中奖',
    primary key (id)
 );
 
@@ -94,6 +80,24 @@ create table tcz_order_log
    modify_time          datetime not null comment '修改时间',
    delete_flag          varchar(1) not null comment '删除标识',
    primary key (id)
+);
+
+alter table tcz_order_log comment '订单流水日志';
+
+
+/*==============================================================*/
+/* Table: tcz_plugin_config                                     */
+/*==============================================================*/
+create table tcz_plugin_config
+(
+	id 					bigint not null,
+	version bigint 		not null default 0 comment '版本',
+	orders int			not null default 0 comment '排序',
+	attributes 			longtext  comment '支付属性',
+	s_enabled 			varchar(1) not null default 0  comment '0激活，1关闭',
+	create_time          datetime not null comment '创建时间',
+    modify_time          datetime not null comment '修改时间',
+	primary key(id)
 );
 
 alter table tcz_order_log comment '订单流水日志';
