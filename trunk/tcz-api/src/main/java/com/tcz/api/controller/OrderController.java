@@ -1,6 +1,5 @@
 package com.tcz.api.controller;
 
-import org.mockito.cglib.beans.BeanCopier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -32,7 +31,7 @@ public class OrderController {
 		try {
 			Order order = orderService.selectByPrimaryKey(id);
 			OrderVo vo  = new OrderVo();
-			BeanCopier.create(Order.class, OrderVo.class, Boolean.FALSE).copy(order, vo, null);
+			BeanUtils.copyProperties(order, vo);
 			return Message.success(vo);
 		} catch (Exception e) {
 			log.error(e.getMessage() , e);
