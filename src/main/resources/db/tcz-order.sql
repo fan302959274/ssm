@@ -32,8 +32,8 @@ create table tcz_order
    is_Invoice           varchar(1) not null default '0' comment '是否开票',
    invoice_info         varchar(255) comment '开票信息',
    comment              varchar(255) comment '备注',
-   create_time          datetime not null,
-   modify_time          datetime not null,
+   create_date          datetime not null,
+   modify_date          datetime not null,
    delete_flag          varchar(1) not null default '0' comment '可用标识 0可用 ,1删除',
    pay_amount           decimal(10) comment '实付金额',
    pay_status           varchar(1) not null default '0' comment '支付状态 0:未支付，1已支付',
@@ -59,8 +59,8 @@ create table tcz_order_detail
    item_id              bigint(30) not null comment '商品id',
    order_code           varchar(30) not null comment '订单编号',
    purchasel_price      decimal(20,4) not null default 0 comment '订购单价',
-   create_time          datetime not null comment '创建日期',
-   modify_time          datetime not null comment '修改日期',
+   create_date          datetime not null comment '创建日期',
+   modify_date          datetime not null comment '修改日期',
    delete_flag          varchar(1) not null default '0' comment '删除标识',
    cloud_code           varchar(50) comment '云购码',
    win_state            varchar(1) not null default '0' comment '中奖状态，0 未中奖 1中奖',
@@ -77,8 +77,8 @@ create table tcz_order_log
    id                   bigint(30) not null,
    order_id             bigint(30) not null comment '订单id',
    change_log           longtext comment '变更日志',
-   create_time          datetime not null comment '创建时间',
-   modify_time          datetime not null comment '修改时间',
+   create_date          datetime not null comment '创建时间',
+   modify_date          datetime not null comment '修改时间',
    delete_flag          varchar(1) not null comment '删除标识',
    primary key (id)
 );
@@ -96,8 +96,8 @@ create table tcz_plugin_config
 	orders int			not null default 0 comment '排序',
 	attributes 			longtext  comment '支付属性',
 	s_enabled 			varchar(1) not null default 0  comment '0激活，1关闭',
-	create_time          datetime not null comment '创建时间',
-    modify_time          datetime not null comment '修改时间',
+	create_date          datetime not null comment '创建时间',
+    modify_date          datetime not null comment '修改时间',
 	primary key(id)
 );
 
