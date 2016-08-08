@@ -32,7 +32,6 @@ public class OrderController {
 		try {
 			Order order = orderService.selectByPrimaryKey(id);
 			OrderVo vo  = new OrderVo();
-			BeanUtils.copyProperties(order, vo);
 			BeanCopier.create(Order.class, OrderVo.class, Boolean.FALSE).copy(order, vo, null);
 			return Message.success(vo);
 		} catch (Exception e) {
