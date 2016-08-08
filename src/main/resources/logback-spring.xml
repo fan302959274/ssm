@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<springProfile name="dev">
+
+	<configuration scan="true" scanPeriod="60 seconds">
+		<contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+			<resetJUL>true</resetJUL>
+		</contextListener>
+
+		<!-- 启用 JMX Management -->
+		<jmxConfigurator />
+		
+		<springProperty scope="context" name="logging.fileDir" source="logging.fileDir"/>
+		<springProperty scope="context" name="logging.fileName" source="logging.fileName"/>
+		<springProperty scope="context" name="rootLevel" source="log.rootLevel"/>
+		<springProperty scope="context" name="tczLevel" source="log.tczLevel"/>
+		<springProperty scope="context" name="sqlLevel" source="log.sqlLevel"/>
+		<springProperty scope="context" name="springLevel" source="log.springLevel"/>
+
+		<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+			<!-- encoder 默认配置为 PatternLayoutEncoder -->
+			<encoder>
+				<pattern>%d [%thread] %-5level %logger - %msg%n</pattern>
+			</encoder>
+		</appender>
+
+		<appender name="file"
+			class="ch.qos.logback.core.rolling.RollingFileAppender">
+			<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+				<fileNamePattern>${logging.fileDir}/${logging.fileName}</fileNamePattern>
+				<maxHistory>30</maxHistory>
+			</rollingPolicy>
+			<triggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+				<maxFileSize>20MB</maxFileSize>
+			</triggeringPolicy>
+
+			<!-- encoder 默认配置为 PatternLayoutEncoder -->
+			<encoder>
+				<pattern>%d [%thread] %-5level %logger - %msg%n</pattern>
+			</encoder>
+		</appender>
+
+		<logger name="com.tcz.api" level="${tczLevel}" />
+		<logger name="org.springframework" level="${springLevel}"/>
+		<logger name="java.sql.Connection" level="${sqlLevel}" />
+		<root level="${rootLevel}">
+			<appender-ref ref="console" />
+			<appender-ref ref="file" />
+		</root>
+		
+	</configuration>
+</springProfile>
+
