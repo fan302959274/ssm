@@ -31,7 +31,7 @@ public class OrderController {
 		try {
 			Order order = orderService.selectByPrimaryKey(id);
 			OrderVo vo  = new OrderVo();
-			BeanUtils.copyProperties(vo, order);
+			BeanUtils.copyProperties(order, vo);
 			return Message.success(vo);
 		} catch (Exception e) {
 			log.error(e.getMessage() , e);
