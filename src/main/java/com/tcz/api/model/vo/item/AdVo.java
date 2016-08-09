@@ -1,9 +1,10 @@
-package com.tcz.api.model.po;
+package com.tcz.api.model.vo.item;
 
 import java.util.Date;
 
-public class Ad {
-    private Long id;
+public class AdVo {
+
+	private Long id;
 
     private String type;
 
@@ -13,11 +14,11 @@ public class Ad {
 
     private String url;
 
+    private String width;
+    
+    private String height;
+    
     private Long adPositionId;
-
-    private Date createDate;
-
-    private Date modifyDate;
 
     public Long getId() {
         return id;
@@ -67,19 +68,20 @@ public class Ad {
         this.adPositionId = adPositionId;
     }
 
-    public Date getCreateDate() {
-        return createDate;
-    }
+	public String getWidth() {
+		return width;
+	}
 
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
+	public void setWidth(String width) {
+		this.width = width;
+	}
 
-    public Date getModifyDate() {
-        return modifyDate;
-    }
+	public String getHeight() {
+		return height;
+	}
 
-    public void setModifyDate(Date modifyDate) {
-        this.modifyDate = modifyDate;
-    }
+	public void setHeight(String height) {
+		this.height = height;
+	}
+    
 }
