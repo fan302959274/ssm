@@ -7,6 +7,16 @@
     <result column="title" property="title" jdbcType="VARCHAR" />
     <result column="path" property="path" jdbcType="VARCHAR" />
     <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="ad_position_id" property="adPositionId" jdbcType="BIGINT" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="modify_date" property="modifyDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="AdVoMap" type="com.tcz.api.model.vo.item.AdVo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="type" property="type" jdbcType="CHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="path" property="path" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
     <result column="width" property="width" jdbcType="VARCHAR" />
     <result column="height" property="height" jdbcType="VARCHAR" />
     <result column="ad_position_id" property="adPositionId" jdbcType="BIGINT" />
@@ -14,7 +24,7 @@
     <result column="modify_date" property="modifyDate" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, type, title, path, url, width, height, ad_position_id, create_date, modify_date
+    id, type, title, path, url, ad_position_id, create_date, modify_date
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -28,13 +38,11 @@
   </delete>
   <insert id="insert" parameterType="com.tcz.api.model.po.Ad" >
     insert into tcz_ad (id, type, title, 
-      path, url, width, height, 
-      ad_position_id, create_date, modify_date
-      )
+      path, url, ad_position_id, 
+      create_date, modify_date)
     values (#{id,jdbcType=BIGINT}, #{type,jdbcType=CHAR}, #{title,jdbcType=VARCHAR}, 
-      #{path,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{width,jdbcType=VARCHAR}, #{height,jdbcType=VARCHAR}, 
-      #{adPositionId,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, #{modifyDate,jdbcType=TIMESTAMP}
-      )
+      #{path,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{adPositionId,jdbcType=BIGINT}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{modifyDate,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.tcz.api.model.po.Ad" >
     insert into tcz_ad
@@ -53,12 +61,6 @@
       </if>
       <if test="url != null" >
         url,
-      </if>
-      <if test="width != null" >
-        width,
-      </if>
-      <if test="height != null" >
-        height,
       </if>
       <if test="adPositionId != null" >
         ad_position_id,
@@ -86,12 +88,6 @@
       <if test="url != null" >
         #{url,jdbcType=VARCHAR},
       </if>
-      <if test="width != null" >
-        #{width,jdbcType=VARCHAR},
-      </if>
-      <if test="height != null" >
-        #{height,jdbcType=VARCHAR},
-      </if>
       <if test="adPositionId != null" >
         #{adPositionId,jdbcType=BIGINT},
       </if>
@@ -118,12 +114,6 @@
       <if test="url != null" >
         url = #{url,jdbcType=VARCHAR},
       </if>
-      <if test="width != null" >
-        width = #{width,jdbcType=VARCHAR},
-      </if>
-      <if test="height != null" >
-        height = #{height,jdbcType=VARCHAR},
-      </if>
       <if test="adPositionId != null" >
         ad_position_id = #{adPositionId,jdbcType=BIGINT},
       </if>
@@ -142,11 +132,27 @@
       title = #{title,jdbcType=VARCHAR},
       path = #{path,jdbcType=VARCHAR},
       url = #{url,jdbcType=VARCHAR},
-      width = #{width,jdbcType=VARCHAR},
-      height = #{height,jdbcType=VARCHAR},
       ad_position_id = #{adPositionId,jdbcType=BIGINT},
       create_date = #{createDate,jdbcType=TIMESTAMP},
       modify_date = #{modifyDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  
+  <select id="findAds" parameterType="java.lang.Long" resultMap="BaseResultMap">
+	  SELECT
+		ad.id,
+		ad.ad_position_id,
+		ad.create_date,
+		ad.modify_date,
+		ad.path,
+		ad.title,
+		ad.type,
+		ad.url,
+		ap.height,
+		ap.width
+	FROM
+		tcz_ad ad,tcz_ad_position ap
+	WHERE
+	ad.ad_position_id = #{adPositionId} and ad.ad_position_id = ap.id
+  </select>
 </mapper>
