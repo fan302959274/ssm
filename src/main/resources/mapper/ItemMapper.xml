@@ -14,6 +14,7 @@
     <result column="price" property="price" jdbcType="INTEGER" />
     <result column="periods" property="periods" jdbcType="INTEGER" />
     <result column="max_periods" property="maxPeriods" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
     <result column="is_marketable" property="isMarketable" jdbcType="VARCHAR" />
     <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
     <result column="modify_date" property="modifyDate" jdbcType="TIMESTAMP" />
@@ -23,7 +24,7 @@
   </resultMap>
   <sql id="Base_Column_List" >
     id, brand_id, category_id, sn, name, title, image, cost, sales, price, periods, max_periods, 
-    is_marketable, create_date, modify_date
+    status, is_marketable, create_date, modify_date
   </sql>
   <sql id="Blob_Column_List" >
     introduction
@@ -44,15 +45,15 @@
     insert into tcz_item (id, brand_id, category_id, 
       sn, name, title, image, 
       cost, sales, price, 
-      periods, max_periods, is_marketable, 
-      create_date, modify_date, introduction
-      )
+      periods, max_periods, status, 
+      is_marketable, create_date, modify_date, 
+      introduction)
     values (#{id,jdbcType=BIGINT}, #{brandId,jdbcType=BIGINT}, #{categoryId,jdbcType=BIGINT}, 
       #{sn,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, 
       #{cost,jdbcType=DECIMAL}, #{sales,jdbcType=INTEGER}, #{price,jdbcType=INTEGER}, 
-      #{periods,jdbcType=INTEGER}, #{maxPeriods,jdbcType=INTEGER}, #{isMarketable,jdbcType=VARCHAR}, 
-      #{createDate,jdbcType=TIMESTAMP}, #{modifyDate,jdbcType=TIMESTAMP}, #{introduction,jdbcType=LONGVARCHAR}
-      )
+      #{periods,jdbcType=INTEGER}, #{maxPeriods,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}, 
+      #{isMarketable,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{modifyDate,jdbcType=TIMESTAMP}, 
+      #{introduction,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.tcz.api.model.po.Item" >
     insert into tcz_item
@@ -92,6 +93,9 @@
       </if>
       <if test="maxPeriods != null" >
         max_periods,
+      </if>
+      <if test="status != null" >
+        status,
       </if>
       <if test="isMarketable != null" >
         is_marketable,
@@ -143,6 +147,9 @@
       <if test="maxPeriods != null" >
         #{maxPeriods,jdbcType=INTEGER},
       </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
       <if test="isMarketable != null" >
         #{isMarketable,jdbcType=VARCHAR},
       </if>
@@ -193,6 +200,9 @@
       <if test="maxPeriods != null" >
         max_periods = #{maxPeriods,jdbcType=INTEGER},
       </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
       <if test="isMarketable != null" >
         is_marketable = #{isMarketable,jdbcType=VARCHAR},
       </if>
@@ -221,6 +231,7 @@
       price = #{price,jdbcType=INTEGER},
       periods = #{periods,jdbcType=INTEGER},
       max_periods = #{maxPeriods,jdbcType=INTEGER},
+      status = #{status,jdbcType=VARCHAR},
       is_marketable = #{isMarketable,jdbcType=VARCHAR},
       create_date = #{createDate,jdbcType=TIMESTAMP},
       modify_date = #{modifyDate,jdbcType=TIMESTAMP},
@@ -240,12 +251,13 @@
       price = #{price,jdbcType=INTEGER},
       periods = #{periods,jdbcType=INTEGER},
       max_periods = #{maxPeriods,jdbcType=INTEGER},
+      status = #{status,jdbcType=VARCHAR},
       is_marketable = #{isMarketable,jdbcType=VARCHAR},
       create_date = #{createDate,jdbcType=TIMESTAMP},
       modify_date = #{modifyDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
-    
+  
   <select id="hotItems" resultMap="BaseResultMap">
   	SELECT
 	  distinct ti.id,ti.title,ti.image,ti.sales,ti.price

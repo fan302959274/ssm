@@ -6,49 +6,36 @@ import java.util.Date;
 public class Item {
     private Long id;
 
-    /** 品牌ID */
     private Long brandId;
 
-    /** 分类ID */
     private Long categoryId;
 
-    /** 编号 */
     private String sn;
 
-    /** 名称 */
     private String name;
-    
-    /** 标题 */
+
     private String title;
 
-    /** 展现图片*/
     private String image;
 
-    /** 成本 */
     private BigDecimal cost;
 
-    /** 已销售金额 */
     private Integer sales;
 
-    /** 价格 */
     private Integer price;
 
-    /** 当前期数 */
     private Integer periods;
 
-    /** 最大期数 */
     private Integer maxPeriods;
 
-    /** 是否上架 */
+    private String status;
+
     private String isMarketable;
 
-    /** 创建日期 */
     private Date createDate;
 
-    /** 修改日期*/
     private Date modifyDate;
 
-    /** 商品介绍 */
     private String introduction;
 
     public Long getId() {
@@ -89,6 +76,14 @@ public class Item {
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title == null ? null : title.trim();
     }
 
     public String getImage() {
@@ -139,6 +134,14 @@ public class Item {
         this.maxPeriods = maxPeriods;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status == null ? null : status.trim();
+    }
+
     public String getIsMarketable() {
         return isMarketable;
     }
@@ -170,12 +173,4 @@ public class Item {
     public void setIntroduction(String introduction) {
         this.introduction = introduction == null ? null : introduction.trim();
     }
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
 }
