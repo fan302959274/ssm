@@ -1,7 +1,5 @@
 package com.tcz.api.model.vo.item;
 
-import java.util.Date;
-
 public class AdVo {
 
 	private Long id;
