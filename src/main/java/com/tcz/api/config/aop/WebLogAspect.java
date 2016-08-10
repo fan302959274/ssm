@@ -35,17 +35,17 @@ public class WebLogAspect {
 
         // 记录下请求内容
         logger.info("call api url : {}" , request.getRequestURL().toString());
-        logger.info("http method : {}" , request.getMethod());
-        logger.info("ip : {}" , request.getRemoteAddr());
-        logger.info("class method : {}" , joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
-        logger.info("ARGS : {}" , Arrays.toString(joinPoint.getArgs()));
+    //    logger.info("http method : {}" , request.getMethod());
+    //    logger.info("ip : {}" , request.getRemoteAddr());
+    //    logger.info("class method : {}" , joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
+    //    logger.info("ARGS : {}" , Arrays.toString(joinPoint.getArgs()));
         
     }
 
     @AfterReturning(returning = "ret", pointcut = "webLog()")
     public void doAfterReturning(Object ret) throws Throwable {
         // 处理完请求，返回内容
-        logger.info("RESPONSE {} : " , ret);
+    //    logger.info("RESPONSE {} : " , ret);
         logger.info("end call time : {} " , new Date().getTime() - time);
     }
 
