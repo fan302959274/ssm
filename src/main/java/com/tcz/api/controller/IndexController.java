@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tcz.api.model.vo.item.AdVo;
 import com.tcz.api.model.vo.item.CurrentShoppVo;
+import com.tcz.api.model.vo.item.ItemOwnerVo;
 import com.tcz.api.model.vo.item.ItemVo;
 import com.tcz.api.service.AdService;
 import com.tcz.api.service.ItemService;
@@ -35,8 +36,16 @@ public class IndexController {
 	AdService adService;
 	
 	// 正在揭晓
-	public void raffleItems(){
-		
+	@RequestMapping("/raffleItems")
+	public Message raffleItems(){
+		List<ItemVo> items = null;
+		try {
+			items =  itemService.newItems();
+		} catch (Exception e) {
+			log.error(e.getMessage() , e);
+			return Message.error();
+		}
+		return Message.success(items);
 	}
 
 	// 热门推荐
@@ -110,10 +119,16 @@ public class IndexController {
 		return Message.success(shoppVos);
 	}
 	
-	@RequestMapping("/findItems/{brandId}-{categoryId}-{property}-{direction}")
-	public Message findItems(@PathVariable("brandId")String brandId , @PathVariable("categoryId")String categoryId , 
-			@PathVariable("property")String property , @PathVariable("direction")String direction){
-		return Message.success(null);
+	// 商品获取者
+	@RequestMapping("/itemOwner")
+	public Message itemOwner(){
+		ItemOwnerVo owner = new ItemOwnerVo();
+		owner.setItemImage("http://goodsimg.1yyg.com/goodspic/pic-200-200/20151026181548493.jpg");
+		owner.setItemTitle("蓝月亮 亮白增艳洗衣液（自然清香）3kg/瓶");
+		owner.setPeriods(1);
+		owner.setUserName("物久迈有");
+		owner.setUserWeb("http://u.1yyg.com/1008747465");
+		owner.setIpAddr("上海");
+		return Message.success(owner);
 	}
-	
 }
