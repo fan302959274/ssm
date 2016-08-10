@@ -138,12 +138,10 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
   
-  <select id="findAds" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="findAds" parameterType="java.lang.Long" resultMap="AdVoMap">
 	  SELECT
 		ad.id,
 		ad.ad_position_id,
-		ad.create_date,
-		ad.modify_date,
 		ad.path,
 		ad.title,
 		ad.type,

@@ -4,6 +4,8 @@ public class ItemVo {
 
 	private Long id;
 	
+	private Integer periods; 
+	
 	private String title;
 	
 	private String image;
@@ -50,6 +52,14 @@ public class ItemVo {
 
 	public void setPrice(Integer price) {
 		this.price = price;
+	}
+
+	public Integer getPeriods() {
+		return periods;
+	}
+
+	public void setPeriods(Integer periods) {
+		this.periods = periods;
 	}
 	
 }

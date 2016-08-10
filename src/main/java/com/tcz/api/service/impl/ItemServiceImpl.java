@@ -44,7 +44,7 @@ public class ItemServiceImpl implements ItemService{
 
 	@Override
 	public List<ItemVo> newItems() {
-		List<Item> items = itemMapper.soonItems();
+		List<Item> items = itemMapper.newItems();
 		List<ItemVo> hotItems = new ArrayList<>();
 		for (int i = 0; i < items.size(); i++) {
 			ItemVo newItem = new ItemVo();

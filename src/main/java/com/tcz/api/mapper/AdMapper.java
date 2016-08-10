@@ -1,8 +1,8 @@
 package com.tcz.api.mapper;
 
 import java.util.List;
-
 import com.tcz.api.model.po.Ad;
+import com.tcz.api.model.vo.item.AdVo;
 
 public interface AdMapper {
     int deleteByPrimaryKey(Long id);
@@ -17,5 +17,5 @@ public interface AdMapper {
 
     int updateByPrimaryKey(Ad record);
 
-	List<Ad> findAds(Long adPositionId);
+	List<AdVo> findAds(Long adPositionId);
 }
