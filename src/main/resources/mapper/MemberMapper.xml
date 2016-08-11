@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tcz.api.mapper.MemberMapper">
+	<resultMap id="BaseResultMap" type="com.tcz.api.model.po.Member">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+		<result column="modify_date" property="modifyDate" jdbcType="TIMESTAMP" />
+		<result column="address" property="address" jdbcType="VARCHAR" />
+		<result column="amount" property="amount" jdbcType="DECIMAL" />
+		<result column="balance" property="balance" jdbcType="DECIMAL" />
+		<result column="commission" property="commission" jdbcType="DECIMAL" />
+		<result column="birth" property="birth" jdbcType="TIMESTAMP" />
+		<result column="email" property="email" jdbcType="VARCHAR" />
+		<result column="gender" property="gender" jdbcType="INTEGER" />
+		<result column="is_enabled" property="isEnabled" jdbcType="INTEGER" />
+		<result column="is_locked" property="isLocked" jdbcType="INTEGER" />
+		<result column="locked_date" property="lockedDate" jdbcType="TIMESTAMP" />
+		<result column="login_date" property="loginDate" jdbcType="TIMESTAMP" />
+		<result column="login_failure_count" property="loginFailureCount"
+			jdbcType="INTEGER" />
+		<result column="login_ip" property="loginIp" jdbcType="VARCHAR" />
+		<result column="mobile_phone" property="mobilePhone" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="user_photo" property="userPhoto" jdbcType="VARCHAR" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+		<result column="fixed_phone" property="fixedPhone" jdbcType="VARCHAR" />
+		<result column="point" property="point" jdbcType="BIGINT" />
+		<result column="register_ip" property="registerIp" jdbcType="VARCHAR" />
+		<result column="area_id" property="areaId" jdbcType="BIGINT" />
+		<result column="member_rank_id" property="memberRankId"
+			jdbcType="BIGINT" />
+		<result column="is_deleted" property="isDeleted" jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, create_date, modify_date, address, amount, balance,
+		commission,
+		birth, email,
+		gender, is_enabled, is_locked, locked_date,
+		login_date, login_failure_count,
+		login_ip,
+		mobile_phone, name,
+		user_photo, password, fixed_phone, point, register_ip, area_id,
+		member_rank_id, is_deleted
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from tcz_member
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		tcz_member
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="insert" parameterType="com.tcz.api.model.po.Member">
+		insert into tcz_member (id,
+		create_date, modify_date,
+		address, amount, balance,
+		commission, birth,
+		email,
+		gender, is_enabled, is_locked,
+		locked_date, login_date,
+		login_failure_count,
+		login_ip, mobile_phone, name,
+		user_photo, password,
+		fixed_phone,
+		point, register_ip, area_id,
+		member_rank_id, is_deleted)
+		values (#{id,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP},
+		#{modifyDate,jdbcType=TIMESTAMP},
+		#{address,jdbcType=VARCHAR},
+		#{amount,jdbcType=DECIMAL}, #{balance,jdbcType=DECIMAL},
+		#{commission,jdbcType=DECIMAL}, #{birth,jdbcType=TIMESTAMP},
+		#{email,jdbcType=VARCHAR},
+		#{gender,jdbcType=INTEGER},
+		#{isEnabled,jdbcType=INTEGER}, #{isLocked,jdbcType=INTEGER},
+		#{lockedDate,jdbcType=TIMESTAMP}, #{loginDate,jdbcType=TIMESTAMP},
+		#{loginFailureCount,jdbcType=INTEGER},
+		#{loginIp,jdbcType=VARCHAR},
+		#{mobilePhone,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+		#{userPhoto,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+		#{fixedPhone,jdbcType=VARCHAR},
+		#{point,jdbcType=BIGINT},
+		#{registerIp,jdbcType=VARCHAR}, #{areaId,jdbcType=BIGINT},
+		#{memberRankId,jdbcType=BIGINT}, #{isDeleted,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective" parameterType="com.tcz.api.model.po.Member">
+		insert into tcz_member
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="createDate != null">
+				create_date,
+			</if>
+			<if test="modifyDate != null">
+				modify_date,
+			</if>
+			<if test="address != null">
+				address,
+			</if>
+			<if test="amount != null">
+				amount,
+			</if>
+			<if test="balance != null">
+				balance,
+			</if>
+			<if test="commission != null">
+				commission,
+			</if>
+			<if test="birth != null">
+				birth,
+			</if>
+			<if test="email != null">
+				email,
+			</if>
+			<if test="gender != null">
+				gender,
+			</if>
+			<if test="isEnabled != null">
+				is_enabled,
+			</if>
+			<if test="isLocked != null">
+				is_locked,
+			</if>
+			<if test="lockedDate != null">
+				locked_date,
+			</if>
+			<if test="loginDate != null">
+				login_date,
+			</if>
+			<if test="loginFailureCount != null">
+				login_failure_count,
+			</if>
+			<if test="loginIp != null">
+				login_ip,
+			</if>
+			<if test="mobilePhone != null">
+				mobile_phone,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="userPhoto != null">
+				user_photo,
+			</if>
+			<if test="password != null">
+				password,
+			</if>
+			<if test="fixedPhone != null">
+				fixed_phone,
+			</if>
+			<if test="point != null">
+				point,
+			</if>
+			<if test="registerIp != null">
+				register_ip,
+			</if>
+			<if test="areaId != null">
+				area_id,
+			</if>
+			<if test="memberRankId != null">
+				member_rank_id,
+			</if>
+			<if test="isDeleted != null">
+				is_deleted,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyDate != null">
+				#{modifyDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="address != null">
+				#{address,jdbcType=VARCHAR},
+			</if>
+			<if test="amount != null">
+				#{amount,jdbcType=DECIMAL},
+			</if>
+			<if test="balance != null">
+				#{balance,jdbcType=DECIMAL},
+			</if>
+			<if test="commission != null">
+				#{commission,jdbcType=DECIMAL},
+			</if>
+			<if test="birth != null">
+				#{birth,jdbcType=TIMESTAMP},
+			</if>
+			<if test="email != null">
+				#{email,jdbcType=VARCHAR},
+			</if>
+			<if test="gender != null">
+				#{gender,jdbcType=INTEGER},
+			</if>
+			<if test="isEnabled != null">
+				#{isEnabled,jdbcType=INTEGER},
+			</if>
+			<if test="isLocked != null">
+				#{isLocked,jdbcType=INTEGER},
+			</if>
+			<if test="lockedDate != null">
+				#{lockedDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="loginDate != null">
+				#{loginDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="loginFailureCount != null">
+				#{loginFailureCount,jdbcType=INTEGER},
+			</if>
+			<if test="loginIp != null">
+				#{loginIp,jdbcType=VARCHAR},
+			</if>
+			<if test="mobilePhone != null">
+				#{mobilePhone,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="userPhoto != null">
+				#{userPhoto,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				#{password,jdbcType=VARCHAR},
+			</if>
+			<if test="fixedPhone != null">
+				#{fixedPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="point != null">
+				#{point,jdbcType=BIGINT},
+			</if>
+			<if test="registerIp != null">
+				#{registerIp,jdbcType=VARCHAR},
+			</if>
+			<if test="areaId != null">
+				#{areaId,jdbcType=BIGINT},
+			</if>
+			<if test="memberRankId != null">
+				#{memberRankId,jdbcType=BIGINT},
+			</if>
+			<if test="isDeleted != null">
+				#{isDeleted,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.tcz.api.model.po.Member">
+		update tcz_member
+		<set>
+			<if test="createDate != null">
+				create_date = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="modifyDate != null">
+				modify_date = #{modifyDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="address != null">
+				address = #{address,jdbcType=VARCHAR},
+			</if>
+			<if test="amount != null">
+				amount = #{amount,jdbcType=DECIMAL},
+			</if>
+			<if test="balance != null">
+				balance = #{balance,jdbcType=DECIMAL},
+			</if>
+			<if test="commission != null">
+				commission = #{commission,jdbcType=DECIMAL},
+			</if>
+			<if test="birth != null">
+				birth = #{birth,jdbcType=TIMESTAMP},
+			</if>
+			<if test="email != null">
+				email = #{email,jdbcType=VARCHAR},
+			</if>
+			<if test="gender != null">
+				gender = #{gender,jdbcType=INTEGER},
+			</if>
+			<if test="isEnabled != null">
+				is_enabled = #{isEnabled,jdbcType=INTEGER},
+			</if>
+			<if test="isLocked != null">
+				is_locked = #{isLocked,jdbcType=INTEGER},
+			</if>
+			<if test="lockedDate != null">
+				locked_date = #{lockedDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="loginDate != null">
+				login_date = #{loginDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="loginFailureCount != null">
+				login_failure_count =
+				#{loginFailureCount,jdbcType=INTEGER},
+			</if>
+			<if test="loginIp != null">
+				login_ip = #{loginIp,jdbcType=VARCHAR},
+			</if>
+			<if test="mobilePhone != null">
+				mobile_phone = #{mobilePhone,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="userPhoto != null">
+				user_photo = #{userPhoto,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				password = #{password,jdbcType=VARCHAR},
+			</if>
+			<if test="fixedPhone != null">
+				fixed_phone = #{fixedPhone,jdbcType=VARCHAR},
+			</if>
+			<if test="point != null">
+				point = #{point,jdbcType=BIGINT},
+			</if>
+			<if test="registerIp != null">
+				register_ip = #{registerIp,jdbcType=VARCHAR},
+			</if>
+			<if test="areaId != null">
+				area_id = #{areaId,jdbcType=BIGINT},
+			</if>
+			<if test="memberRankId != null">
+				member_rank_id = #{memberRankId,jdbcType=BIGINT},
+			</if>
+			<if test="isDeleted != null">
+				is_deleted = #{isDeleted,jdbcType=INTEGER},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.tcz.api.model.po.Member">
+		update tcz_member
+		set create_date = #{createDate,jdbcType=TIMESTAMP},
+		modify_date =
+		#{modifyDate,jdbcType=TIMESTAMP},
+		address =
+		#{address,jdbcType=VARCHAR},
+		amount = #{amount,jdbcType=DECIMAL},
+		balance = #{balance,jdbcType=DECIMAL},
+		commission =
+		#{commission,jdbcType=DECIMAL},
+		birth = #{birth,jdbcType=TIMESTAMP},
+		email = #{email,jdbcType=VARCHAR},
+		gender = #{gender,jdbcType=INTEGER},
+		is_enabled = #{isEnabled,jdbcType=INTEGER},
+		is_locked =
+		#{isLocked,jdbcType=INTEGER},
+		locked_date =
+		#{lockedDate,jdbcType=TIMESTAMP},
+		login_date =
+		#{loginDate,jdbcType=TIMESTAMP},
+		login_failure_count =
+		#{loginFailureCount,jdbcType=INTEGER},
+		login_ip =
+		#{loginIp,jdbcType=VARCHAR},
+		mobile_phone =
+		#{mobilePhone,jdbcType=VARCHAR},
+		name = #{name,jdbcType=VARCHAR},
+		user_photo = #{userPhoto,jdbcType=VARCHAR},
+		password =
+		#{password,jdbcType=VARCHAR},
+		fixed_phone =
+		#{fixedPhone,jdbcType=VARCHAR},
+		point = #{point,jdbcType=BIGINT},
+		register_ip = #{registerIp,jdbcType=VARCHAR},
+		area_id =
+		#{areaId,jdbcType=BIGINT},
+		member_rank_id =
+		#{memberRankId,jdbcType=BIGINT},
+		is_deleted =
+		#{isDeleted,jdbcType=INTEGER}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<select id="selectYunRecord" parameterType="java.lang.Long" resultType="java.util.Map">
+		SELECT
+		i.image as
+		image,i.name as name,i.status as status,
+		enter.enterCount
+		FROM
+		tcz_member
+		m
+		LEFT JOIN tcz_order o ON m.id = o.member_id
+		LEFT JOIN tcz_order_detail
+		od ON o.id = od.order_id
+		LEFT JOIN tcz_item i ON od.item_id = i.id
+		LEFT
+		JOIN (
+		SELECT
+		oo.item_id,
+		count(oo.item_id) AS enterCount
+		FROM
+		tcz_order_detail oo
+		GROUP BY
+		oo.item_id
+		) enter ON i.id = enter.item_id
+		WHERE
+		m.is_deleted = 0
+		AND o.delete_flag = 0
+	    AND m.id = #{id,jdbcType=BIGINT}
+	</select>
+</mapper>
