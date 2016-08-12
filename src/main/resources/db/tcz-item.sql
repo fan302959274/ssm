@@ -179,3 +179,21 @@ INSERT INTO tcz.tcz_tag(id, name, create_date, modify_date) VALUES
 (3, '正在揭晓', '2016-08-04 11:40:17', '2016-08-04 11:40:18');
 INSERT INTO tcz.tcz_tag(id, name, create_date, modify_date) VALUES
 (4, '热门推荐', '2016-08-04 11:40:31', '2016-08-04 11:40:31');
+
+DROP TABLE IF EXISTS `tcz_lottery`;
+CREATE TABLE `tcz_lottery` (
+  `id` bigint(20) NOT NULL,
+  `item_id` bigint(20) DEFAULT '0' COMMENT '商品ID',
+  `periods` int(255) DEFAULT '0' COMMENT '期数',
+  `member_id` bigint(20) DEFAULT '0' COMMENT '中奖会员',
+  `member_user_name` varchar(255) DEFAULT '' COMMENT '会员用户名',
+  `member_name` varchar(255) DEFAULT '' COMMENT '会员名称',
+  `ip_addr` varchar(30) DEFAULT '' COMMENT '下单地址',
+  `item_name` varchar(255) DEFAULT '' COMMENT '商品名称',
+  `ip` varchar(255) DEFAULT '' COMMENT '下单IP',
+  `raffle_date` datetime DEFAULT NULL COMMENT '开奖日期',
+  `quantity` int(255) DEFAULT '0' COMMENT '购买数量',
+  `create_date` datetime DEFAULT NULL COMMENT '创建日期',
+  `modify_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
