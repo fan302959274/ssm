@@ -3,7 +3,9 @@ package com.tcz.api.controller;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.time.DateUtils;
 import org.slf4j.Logger;
@@ -149,5 +151,14 @@ public class IndexController {
 			return Message.error();
 		}
 		return Message.success(diffSeconds);
+	}
+	
+	// 总共购买数量
+	@RequestMapping("/totalBuyCount")
+	public Message totalBuyCount(){
+		Map<String, String> data = new HashMap<>();
+		data.put("fundTotal", "1000000");
+		data.put("count", "0000100001");
+		return Message.success(data);
 	}
 }
