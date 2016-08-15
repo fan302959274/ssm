@@ -93,8 +93,8 @@ public class IndexController {
 	}
 	
 	// 首页轮播广告
-	@RequestMapping("/findAds/{adPositionId}")
-	public Message findAds(@PathVariable("adPositionId")Long adPositionId){
+	@RequestMapping("/findAds")
+	public Message findAds(Long adPositionId){
 		List<AdVo> adVos = null;
 		try {
 			adVos =  adService.findAds(adPositionId);
