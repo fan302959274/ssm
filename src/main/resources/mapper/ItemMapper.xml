@@ -3,6 +3,7 @@
 <mapper namespace="com.tcz.api.mapper.ItemMapper" >
   <resultMap id="BaseResultMap" type="com.tcz.api.model.po.Item" >
     <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="goods_id" property="goodsId" jdbcType="VARCHAR" />
     <result column="brand_id" property="brandId" jdbcType="BIGINT" />
     <result column="category_id" property="categoryId" jdbcType="BIGINT" />
     <result column="sn" property="sn" jdbcType="VARCHAR" />
@@ -23,8 +24,8 @@
     <result column="introduction" property="introduction" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, brand_id, category_id, sn, name, title, image, cost, sales, price, periods, max_periods, 
-    status, is_marketable, create_date, modify_date
+    id, goods_id, brand_id, category_id, sn, name, title, image, cost, sales, price, 
+    periods, max_periods, status, is_marketable, create_date, modify_date
   </sql>
   <sql id="Blob_Column_List" >
     introduction
@@ -42,24 +43,29 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.tcz.api.model.po.Item" >
-    insert into tcz_item (id, brand_id, category_id, 
-      sn, name, title, image, 
-      cost, sales, price, 
-      periods, max_periods, status, 
-      is_marketable, create_date, modify_date, 
-      introduction)
-    values (#{id,jdbcType=BIGINT}, #{brandId,jdbcType=BIGINT}, #{categoryId,jdbcType=BIGINT}, 
-      #{sn,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, 
-      #{cost,jdbcType=DECIMAL}, #{sales,jdbcType=INTEGER}, #{price,jdbcType=INTEGER}, 
-      #{periods,jdbcType=INTEGER}, #{maxPeriods,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}, 
-      #{isMarketable,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{modifyDate,jdbcType=TIMESTAMP}, 
-      #{introduction,jdbcType=LONGVARCHAR})
+    insert into tcz_item (id, goods_id, brand_id, 
+      category_id, sn, name, 
+      title, image, cost, 
+      sales, price, periods, 
+      max_periods, status, is_marketable, 
+      create_date, modify_date, introduction
+      )
+    values (#{id,jdbcType=BIGINT}, #{goodsId,jdbcType=VARCHAR}, #{brandId,jdbcType=BIGINT}, 
+      #{categoryId,jdbcType=BIGINT}, #{sn,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{title,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, #{cost,jdbcType=DECIMAL}, 
+      #{sales,jdbcType=INTEGER}, #{price,jdbcType=INTEGER}, #{periods,jdbcType=INTEGER}, 
+      #{maxPeriods,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}, #{isMarketable,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{modifyDate,jdbcType=TIMESTAMP}, #{introduction,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.tcz.api.model.po.Item" >
     insert into tcz_item
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
+      </if>
+      <if test="goodsId != null" >
+        goods_id,
       </if>
       <if test="brandId != null" >
         brand_id,
@@ -114,6 +120,9 @@
       <if test="id != null" >
         #{id,jdbcType=BIGINT},
       </if>
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=VARCHAR},
+      </if>
       <if test="brandId != null" >
         #{brandId,jdbcType=BIGINT},
       </if>
@@ -167,6 +176,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.tcz.api.model.po.Item" >
     update tcz_item
     <set >
+      <if test="goodsId != null" >
+        goods_id = #{goodsId,jdbcType=VARCHAR},
+      </if>
       <if test="brandId != null" >
         brand_id = #{brandId,jdbcType=BIGINT},
       </if>
@@ -220,7 +232,8 @@
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.tcz.api.model.po.Item" >
     update tcz_item
-    set brand_id = #{brandId,jdbcType=BIGINT},
+    set goods_id = #{goodsId,jdbcType=VARCHAR},
+      brand_id = #{brandId,jdbcType=BIGINT},
       category_id = #{categoryId,jdbcType=BIGINT},
       sn = #{sn,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
@@ -240,7 +253,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.tcz.api.model.po.Item" >
     update tcz_item
-    set brand_id = #{brandId,jdbcType=BIGINT},
+    set goods_id = #{goodsId,jdbcType=VARCHAR},
+      brand_id = #{brandId,jdbcType=BIGINT},
       category_id = #{categoryId,jdbcType=BIGINT},
       sn = #{sn,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},

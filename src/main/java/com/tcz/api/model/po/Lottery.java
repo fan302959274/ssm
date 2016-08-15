@@ -5,9 +5,7 @@ import java.util.Date;
 public class Lottery {
     private Long id;
 
-    private Long itemId;
-
-    private Integer periods;
+    private String goodsId;
 
     private Long memberId;
 
@@ -37,20 +35,12 @@ public class Lottery {
         this.id = id;
     }
 
-    public Long getItemId() {
-        return itemId;
+    public String getGoodsId() {
+        return goodsId;
     }
 
-    public void setItemId(Long itemId) {
-        this.itemId = itemId;
-    }
-
-    public Integer getPeriods() {
-        return periods;
-    }
-
-    public void setPeriods(Integer periods) {
-        this.periods = periods;
+    public void setGoodsId(String goodsId) {
+        this.goodsId = goodsId == null ? null : goodsId.trim();
     }
 
     public Long getMemberId() {
