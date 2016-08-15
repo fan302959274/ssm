@@ -5,17 +5,20 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tcz.api.model.po.Lottery;
 import com.tcz.api.model.vo.item.AdVo;
 import com.tcz.api.model.vo.item.CurrentShoppVo;
-import com.tcz.api.model.vo.item.ItemOwnerVo;
+import com.tcz.api.model.vo.item.LotteryVo;
 import com.tcz.api.model.vo.item.ItemVo;
 import com.tcz.api.service.AdService;
 import com.tcz.api.service.ItemService;
+import com.tcz.api.service.LotteryService;
 import com.tcz.core.rest.Message;
 
 /**
@@ -31,16 +34,18 @@ public class IndexController {
 	private Logger log = LoggerFactory.getLogger(getClass());
 	
 	@Autowired
-	private ItemService itemService;
+	ItemService itemService;
 	@Autowired
 	AdService adService;
+	@Autowired
+	LotteryService lotteryService;
 	
 	// 正在揭晓
 	@RequestMapping("/raffleItems")
 	public Message raffleItems(){
 		List<ItemVo> items = null;
 		try {
-			items =  itemService.newItems();
+			items = itemService.newItems();
 		} catch (Exception e) {
 			log.error(e.getMessage() , e);
 			return Message.error();
@@ -120,15 +125,16 @@ public class IndexController {
 	}
 	
 	// 商品获取者
-	@RequestMapping("/itemOwner")
-	public Message itemOwner(){
-		ItemOwnerVo owner = new ItemOwnerVo();
-		owner.setItemImage("http://goodsimg.1yyg.com/goodspic/pic-200-200/20151026181548493.jpg");
-		owner.setItemTitle("蓝月亮 亮白增艳洗衣液（自然清香）3kg/瓶");
-		owner.setPeriods(1);
-		owner.setUserName("物久迈有");
-		owner.setUserWeb("http://u.1yyg.com/1008747465");
-		owner.setIpAddr("上海");
-		return Message.success(owner);
+	@RequestMapping("/lottery")
+	public Message lottery(String goodsId){
+		LotteryVo lotteryVo = new LotteryVo();
+		try {
+			Lottery lottery = lotteryService.findByGoodsId(goodsId);
+			BeanUtils.copyProperties(lottery, lotteryVo);
+		} catch (Exception e) {
+			log.error(e.getMessage() , e);
+			return Message.error();
+		}
+		return Message.success(lotteryVo);
 	}
 }

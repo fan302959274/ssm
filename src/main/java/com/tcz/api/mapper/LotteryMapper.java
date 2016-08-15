@@ -14,4 +14,6 @@ public interface LotteryMapper {
     int updateByPrimaryKeySelective(Lottery record);
 
     int updateByPrimaryKey(Lottery record);
+
+	Lottery findByGoodsId(String goodsId);
 }
