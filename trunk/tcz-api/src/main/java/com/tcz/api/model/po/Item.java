@@ -6,6 +6,8 @@ import java.util.Date;
 public class Item {
     private Long id;
 
+    private String goodsId;
+
     private Long brandId;
 
     private Long categoryId;
@@ -44,6 +46,14 @@ public class Item {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getGoodsId() {
+        return goodsId;
+    }
+
+    public void setGoodsId(String goodsId) {
+        this.goodsId = goodsId == null ? null : goodsId.trim();
     }
 
     public Long getBrandId() {

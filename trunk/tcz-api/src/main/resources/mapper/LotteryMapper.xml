@@ -3,8 +3,7 @@
 <mapper namespace="com.tcz.api.mapper.LotteryMapper" >
   <resultMap id="BaseResultMap" type="com.tcz.api.model.po.Lottery" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="item_id" property="itemId" jdbcType="BIGINT" />
-    <result column="periods" property="periods" jdbcType="INTEGER" />
+    <result column="goods_id" property="goodsId" jdbcType="VARCHAR" />
     <result column="member_id" property="memberId" jdbcType="BIGINT" />
     <result column="member_user_name" property="memberUserName" jdbcType="VARCHAR" />
     <result column="member_name" property="memberName" jdbcType="VARCHAR" />
@@ -17,8 +16,8 @@
     <result column="modify_date" property="modifyDate" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, item_id, periods, member_id, member_user_name, member_name, ip_addr, item_name, 
-    ip, raffle_date, quantity, create_date, modify_date
+    id, goods_id, member_id, member_user_name, member_name, ip_addr, item_name, ip, raffle_date, 
+    quantity, create_date, modify_date
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -31,16 +30,16 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.tcz.api.model.po.Lottery" >
-    insert into tcz_lottery (id, item_id, periods, 
-      member_id, member_user_name, member_name, 
-      ip_addr, item_name, ip, 
-      raffle_date, quantity, create_date, 
-      modify_date)
-    values (#{id,jdbcType=BIGINT}, #{itemId,jdbcType=BIGINT}, #{periods,jdbcType=INTEGER}, 
-      #{memberId,jdbcType=BIGINT}, #{memberUserName,jdbcType=VARCHAR}, #{memberName,jdbcType=VARCHAR}, 
-      #{ipAddr,jdbcType=VARCHAR}, #{itemName,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, 
-      #{raffleDate,jdbcType=TIMESTAMP}, #{quantity,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, 
-      #{modifyDate,jdbcType=TIMESTAMP})
+    insert into tcz_lottery (id, goods_id, member_id, 
+      member_user_name, member_name, ip_addr, 
+      item_name, ip, raffle_date, 
+      quantity, create_date, modify_date
+      )
+    values (#{id,jdbcType=BIGINT}, #{goodsId,jdbcType=VARCHAR}, #{memberId,jdbcType=BIGINT}, 
+      #{memberUserName,jdbcType=VARCHAR}, #{memberName,jdbcType=VARCHAR}, #{ipAddr,jdbcType=VARCHAR}, 
+      #{itemName,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{raffleDate,jdbcType=TIMESTAMP}, 
+      #{quantity,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{modifyDate,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.tcz.api.model.po.Lottery" >
     insert into tcz_lottery
@@ -48,11 +47,8 @@
       <if test="id != null" >
         id,
       </if>
-      <if test="itemId != null" >
-        item_id,
-      </if>
-      <if test="periods != null" >
-        periods,
+      <if test="goodsId != null" >
+        goods_id,
       </if>
       <if test="memberId != null" >
         member_id,
@@ -89,11 +85,8 @@
       <if test="id != null" >
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="itemId != null" >
-        #{itemId,jdbcType=BIGINT},
-      </if>
-      <if test="periods != null" >
-        #{periods,jdbcType=INTEGER},
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=VARCHAR},
       </if>
       <if test="memberId != null" >
         #{memberId,jdbcType=BIGINT},
@@ -130,11 +123,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.tcz.api.model.po.Lottery" >
     update tcz_lottery
     <set >
-      <if test="itemId != null" >
-        item_id = #{itemId,jdbcType=BIGINT},
-      </if>
-      <if test="periods != null" >
-        periods = #{periods,jdbcType=INTEGER},
+      <if test="goodsId != null" >
+        goods_id = #{goodsId,jdbcType=VARCHAR},
       </if>
       <if test="memberId != null" >
         member_id = #{memberId,jdbcType=BIGINT},
@@ -171,8 +161,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.tcz.api.model.po.Lottery" >
     update tcz_lottery
-    set item_id = #{itemId,jdbcType=BIGINT},
-      periods = #{periods,jdbcType=INTEGER},
+    set goods_id = #{goodsId,jdbcType=VARCHAR},
       member_id = #{memberId,jdbcType=BIGINT},
       member_user_name = #{memberUserName,jdbcType=VARCHAR},
       member_name = #{memberName,jdbcType=VARCHAR},
