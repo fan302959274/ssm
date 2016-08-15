@@ -1,6 +1,7 @@
 package com.tcz.api.mapper;
 
 import com.tcz.api.model.po.Lottery;
+import com.tcz.api.model.vo.item.LotteryVo;
 
 public interface LotteryMapper {
     int deleteByPrimaryKey(Long id);
@@ -15,5 +16,5 @@ public interface LotteryMapper {
 
     int updateByPrimaryKey(Lottery record);
 
-	Lottery findByGoodsId(String goodsId);
+	LotteryVo findByGoodsId(String goodsId);
 }

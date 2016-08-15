@@ -7,17 +7,13 @@ public class Lottery {
 
     private String goodsId;
 
+    private Long orderId;
+
     private Long memberId;
 
-    private String memberUserName;
+    private String lotteryNumber;
 
-    private String memberName;
-
-    private String ipAddr;
-
-    private String itemName;
-
-    private String ip;
+    private Integer periods;
 
     private Date raffleDate;
 
@@ -43,6 +39,14 @@ public class Lottery {
         this.goodsId = goodsId == null ? null : goodsId.trim();
     }
 
+    public Long getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
+    }
+
     public Long getMemberId() {
         return memberId;
     }
@@ -51,44 +55,20 @@ public class Lottery {
         this.memberId = memberId;
     }
 
-    public String getMemberUserName() {
-        return memberUserName;
+    public String getLotteryNumber() {
+        return lotteryNumber;
     }
 
-    public void setMemberUserName(String memberUserName) {
-        this.memberUserName = memberUserName == null ? null : memberUserName.trim();
+    public void setLotteryNumber(String lotteryNumber) {
+        this.lotteryNumber = lotteryNumber == null ? null : lotteryNumber.trim();
     }
 
-    public String getMemberName() {
-        return memberName;
+    public Integer getPeriods() {
+        return periods;
     }
 
-    public void setMemberName(String memberName) {
-        this.memberName = memberName == null ? null : memberName.trim();
-    }
-
-    public String getIpAddr() {
-        return ipAddr;
-    }
-
-    public void setIpAddr(String ipAddr) {
-        this.ipAddr = ipAddr == null ? null : ipAddr.trim();
-    }
-
-    public String getItemName() {
-        return itemName;
-    }
-
-    public void setItemName(String itemName) {
-        this.itemName = itemName == null ? null : itemName.trim();
-    }
-
-    public String getIp() {
-        return ip;
-    }
-
-    public void setIp(String ip) {
-        this.ip = ip == null ? null : ip.trim();
+    public void setPeriods(Integer periods) {
+        this.periods = periods;
     }
 
     public Date getRaffleDate() {

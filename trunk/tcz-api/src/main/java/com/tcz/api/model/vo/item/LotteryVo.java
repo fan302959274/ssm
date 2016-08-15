@@ -7,6 +7,9 @@ package com.tcz.api.model.vo.item;
  */
 public class LotteryVo {
 
+	/** 彩票ID */
+	private String id;
+	
 	/** 商品名称 */
 	private String itemName;
 	
@@ -14,10 +17,13 @@ public class LotteryVo {
 	private String itemImage;
 	
 	/** 用户主页 */
-	private String userWeb;
+	private String memWeb;
+
+	/** 会员姓名 */
+	private String memName;
 	
 	/** 用户名 */
-	private String userName;
+	private String memUserName;
 	
 	/** 期数 */
 	private Integer periods;
@@ -31,22 +37,6 @@ public class LotteryVo {
 
 	public void setItemImage(String itemImage) {
 		this.itemImage = itemImage;
-	}
-
-	public String getUserWeb() {
-		return userWeb;
-	}
-
-	public void setUserWeb(String userWeb) {
-		this.userWeb = userWeb;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
 	}
 
 	public Integer getPeriods() {
@@ -63,6 +53,46 @@ public class LotteryVo {
 
 	public void setIpAddr(String ipAddr) {
 		this.ipAddr = ipAddr;
+	}
+
+	public String getItemName() {
+		return itemName;
+	}
+
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
+
+	public String getMemUserName() {
+		return memUserName;
+	}
+
+	public void setMemUserName(String memUserName) {
+		this.memUserName = memUserName;
+	}
+
+	public String getMemWeb() {
+		return memWeb;
+	}
+
+	public void setMemWeb(String memWeb) {
+		this.memWeb = memWeb;
+	}
+
+	public String getMemName() {
+		return memName;
+	}
+
+	public void setMemName(String memName) {
+		this.memName = memName;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 	
 }
