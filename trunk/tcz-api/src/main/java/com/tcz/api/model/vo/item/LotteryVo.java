@@ -1,9 +1,14 @@
 package com.tcz.api.model.vo.item;
-
-public class ItemOwnerVo {
+/**
+ * Vo - 彩票
+ * 
+ * @author candy.tam
+ *
+ */
+public class LotteryVo {
 
 	/** 商品名称 */
-	private String itemTitle;
+	private String itemName;
 	
 	/** 商品图片 */
 	private String itemImage;
@@ -58,14 +63,6 @@ public class ItemOwnerVo {
 
 	public void setIpAddr(String ipAddr) {
 		this.ipAddr = ipAddr;
-	}
-
-	public String getItemTitle() {
-		return itemTitle;
-	}
-
-	public void setItemTitle(String itemTitle) {
-		this.itemTitle = itemTitle;
 	}
 	
 }
