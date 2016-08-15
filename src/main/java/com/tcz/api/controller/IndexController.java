@@ -127,14 +127,13 @@ public class IndexController {
 	// 商品获取者
 	@RequestMapping("/lottery")
 	public Message lottery(String goodsId){
-		LotteryVo lotteryVo = new LotteryVo();
+		LotteryVo lottery = null;
 		try {
-			Lottery lottery = lotteryService.findByGoodsId(goodsId);
-			BeanUtils.copyProperties(lottery, lotteryVo);
+			lottery = lotteryService.findByGoodsId(goodsId);
 		} catch (Exception e) {
 			log.error(e.getMessage() , e);
 			return Message.error();
 		}
-		return Message.success(lotteryVo);
+		return Message.success(lottery);
 	}
 }

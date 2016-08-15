@@ -1,9 +1,9 @@
 package com.tcz.api.service;
 
-import com.tcz.api.model.po.Lottery;
+import com.tcz.api.model.vo.item.LotteryVo;
 
 public interface LotteryService {
 
-	Lottery findByGoodsId(String goodsId);
+	LotteryVo findByGoodsId(String goodsId);
 	
 }
