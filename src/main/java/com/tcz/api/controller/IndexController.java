@@ -1,8 +1,11 @@
 package com.tcz.api.controller;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.time.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -132,5 +135,19 @@ public class IndexController {
 			return Message.error();
 		}
 		return Message.success(lottery);
+	}
+	
+	// 系统时间
+	@RequestMapping("/serverTime")
+	public Message serverTime(String time){
+		Long diffSeconds = 0L;
+		try {
+			Date clientDate = DateUtils.parseDate(time, "yyyy-MM-dd HH:mm:ss");
+			diffSeconds = (new Date().getTime() - clientDate.getTime()) / 1000;
+		} catch (ParseException e) {
+			log.error(e.getMessage() , e);
+			return Message.error();
+		}
+		return Message.success(diffSeconds);
 	}
 }
