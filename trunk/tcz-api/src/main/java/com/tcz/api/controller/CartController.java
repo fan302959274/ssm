@@ -13,6 +13,8 @@ import com.tcz.core.rest.Message;
 @RestController
 @RequestMapping("/cart")
 public class CartController {
+	
+	private Integer codeSales = 40;
 
 	@RequestMapping("/getBarcodernoInfo")
 	public Message getBarcodernoInfo(String goodsId){
@@ -21,10 +23,10 @@ public class CartController {
 		//data.put("money", 2);
 		List<Map<String, Object>> data = new ArrayList<>();
 		Map<String, Object> item = new HashMap<>();
-		item.put("codeID", 7574883); // 商品ID
-		item.put("codePeriod", 129985); // 商品期数
+		item.put("codeID", goodsId); // 商品ID
+		item.put("codePeriod", 2); // 商品期数
 		item.put("codeQuantity", 65); // 总数量
-		item.put("codeSales", 40); // 已购数量
+		item.put("codeSales", codeSales++); // 已购数量
 		item.put("codeType", 0); // 商品类型(限购,促销)
 		item.put("codeLimitBuy", 0); // 限购数量
 		item.put("myLimitSales", 0); // 用户限购数量
