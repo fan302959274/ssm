@@ -6,40 +6,50 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tcz.api.model.po.Item;
+import com.tcz.api.service.ItemService;
+import com.tcz.api.utils.WebUtils;
 import com.tcz.core.rest.Message;
 
 @RestController
 @RequestMapping("/cart")
 public class CartController {
 	
-	private Integer codeSales = 40;
+	@Autowired
+	ItemService itemService;
 	
 	//{"code":0,"listItems":[{"codeID":7574883,"codePeriod":129985,"codeQuantity":65,"codeSales":40,"codeType":0,"codeLimitBuy":0,"myLimitSales":0,"goodsID":21876}]}
 	@RequestMapping("/getBarcodernoInfo")
-	public Message getBarcodernoInfo(String goodsId){
+	public Message getBarcodernoInfo(Long id){
 		//Map<String, Object> data = new HashMap<String, Object>();
 		//data.put("count", 2);
 		//data.put("money", 2);
+		Item item = itemService.findById(id);
 		List<Map<String, Object>> data = new ArrayList<>();
-		Map<String, Object> item = new HashMap<>();
-		item.put("codeID", goodsId); // 商品ID
-		item.put("codePeriod", 2); // 商品期数
-		item.put("codeQuantity", 65); // 总数量
-		item.put("codeSales", codeSales++); // 已购数量
-		item.put("codeType", 0); // 商品类型(限购,促销)
-		item.put("codeLimitBuy", 0); // 限购数量
-		item.put("myLimitSales", 0); // 用户限购数量
-		item.put("goodsID", 21876); // 货号ID
-		data.add(item);
+		Map<String, Object> map = new HashMap<>();
+		map.put("codeID", item.getId()); // 商品ID
+		map.put("codePeriod", item.getPeriods()); // 商品期数
+		map.put("codeQuantity", item.getPrice()); // 总数量
+		map.put("codeSales", item.getSales()); // 已购数量
+		map.put("codeType", 0); // 商品类型(限购,促销)
+		map.put("codeLimitBuy", 0); // 限购数量
+		map.put("myLimitSales", 0); // 用户限购数量
+		map.put("goodsID", item.getGoodsId()); // 货号ID
+		data.add(map);
 		return Message.success(data);
 	}
 	
 	// {"code":0,"count":1,"money":1,"listCart":[{"codeID":7910452,"codePeriod":312685,"codeQuantity":1688,"codeSales":1644,"goodsPic":"20151026181548493.jpg","goodsID":22593,"goodsName":"平安银行 招财进宝金章 Au9999 5g","codePrice":"1688","shopNum":1,"codeType":0,"codeLimitBuy":0,"myLimitSales":"0"}],"listUpdate":[],"listOutDate":[],"unvalid":""}
 	@RequestMapping("/cartLabel")
-	public Message cartLabel(){
+	public Message cartLabel(HttpServletRequest request){
+		String cartDataSel =  WebUtils.getCookie(request , "_CartDataSel");
+		System.out.println(cartDataSel);
 		Map<String, Object> data = new HashMap<>();
 		data.put("count", 1);
 		data.put("money", 1);
