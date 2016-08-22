@@ -54,4 +54,9 @@ public class ItemServiceImpl implements ItemService{
 		return hotItems;
 	}
 
+	@Override
+	public Item findById(Long id) {
+		return itemMapper.selectByPrimaryKey(id);
+	}
+
 }

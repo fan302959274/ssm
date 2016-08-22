@@ -24,4 +24,6 @@ public interface ItemMapper {
 	List<Item> soonItems();
 
 	List<Item> newItems();
+
+	Item findByGoodsId(String goodsId);
 }
