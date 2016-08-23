@@ -59,4 +59,9 @@ public class ItemServiceImpl implements ItemService{
 		return itemMapper.selectByPrimaryKey(id);
 	}
 
+	@Override
+	public List<Item> findByIds(List<Long> ids) {
+		return itemMapper.findByIds(ids);
+	}
+
 }

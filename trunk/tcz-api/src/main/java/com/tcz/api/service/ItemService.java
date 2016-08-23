@@ -15,4 +15,6 @@ public interface ItemService {
 	
 	public Item findById(Long id);
 	
+	public List<Item> findByIds(List<Long> ids);
+	
 }

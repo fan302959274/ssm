@@ -298,4 +298,16 @@
 	WHERE ti.id = tit.item_id
 	AND tit.tag_id = '2' AND ti.is_marketable = '1'
   </select>
+  
+  <select id="findByIds" resultMap="BaseResultMap" parameterType="java.util.List">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tcz_item
+    	where id in 
+	  	<foreach item="id" index="index" collection="ids" open="(" separator="," close=")">  
+		 #{id}  
+		</foreach> 
+  </select>
 </mapper>

@@ -2,6 +2,8 @@ package com.tcz.api.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.tcz.api.model.po.Item;
 
 public interface ItemMapper {
@@ -25,5 +27,5 @@ public interface ItemMapper {
 
 	List<Item> newItems();
 
-	Item findByGoodsId(String goodsId);
+	List<Item> findByIds(@Param(value = "ids")List<Long> ids);
 }
