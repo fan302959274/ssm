@@ -49,29 +49,66 @@ public class CartController {
 	@RequestMapping("/cartLabel")
 	public Message cartLabel(HttpServletRequest request){
 		String cartDataSel =  WebUtils.getCookie(request , "_CartDataSel");
+		List<Item> items = itemService.findByIds(getIds(cartDataSel));
+		
 		System.out.println(cartDataSel);
 		Map<String, Object> data = new HashMap<>();
-		data.put("count", 1);
-		data.put("money", 1);
 		data.put("listUpdate", Collections.emptyList());
 		data.put("listOutDate", Collections.emptyList());
 		data.put("unvalid", "");
+		Integer count = 0;
+		Integer money = 0;
 		List<Map<String, Object>> listCart = new ArrayList<>();
-		Map<String, Object> cart = new HashMap<>();
-		cart.put("codeID", 1);
-		cart.put("codePeriod", 19);
-		cart.put("codeQuantity", 10);
-		cart.put("codeSales", 5);
-		cart.put("goodsPic", "20151026181548493.jpg");
-		cart.put("goodsId", 22593);
-		cart.put("goodsName", "平安银行 招财进宝金章 Au9999 5g");
-		cart.put("codePrice", 1688);
-		cart.put("shopNum", 1);
-		cart.put("codeType", 0);
-		cart.put("codeLimitBuy", 0);
-		cart.put("myLimitSales", 0);
-		listCart.add(cart);
+		for(int i=0 ; i<items.size() ; i++){
+			Item item = items.get(i);
+			Map<String, Object> cart = new HashMap<>();
+			cart.put("codeID", item.getId());
+			cart.put("codePeriod", item.getPeriods());
+			cart.put("codeQuantity", item.getPrice());
+			cart.put("codeSales", item.getSales());
+			cart.put("goodsPic", item.getImage());
+			cart.put("goodsId", item.getGoodsId());
+			cart.put("goodsName", item.getName());
+			cart.put("codePrice", item.getPrice());
+			cart.put("shopNum", getCount(cartDataSel, item.getId()));
+			cart.put("codeType", 0);
+			cart.put("codeLimitBuy", 0);
+			cart.put("myLimitSales", 0);
+			listCart.add(cart);
+			count += getCount(cartDataSel, item.getId());
+			money = count;
+		}
+		data.put("count", count);
+		data.put("money", money);
 		data.put("listCart", listCart);
 		return Message.success(data);
+	}
+	
+	private List<Long> getIds(String cartDataSel){
+		String[] cartData =  cartDataSel.split("\\|");
+		List<Long> ids = new ArrayList<>();
+		for(int i=0 ; i<cartData.length ; i++){
+			if(cartData[0].length() == 1){
+				ids.add(Long.parseLong(cartData[0]));
+				return ids;
+			}
+			String[] cart = cartData[i].split(",");
+			ids.add(Long.parseLong(cart[0]));
+		}
+		return ids;
+	}
+	
+	private Integer getCount(String cartDataSel , Long id){
+		String[] cartData =  cartDataSel.split("\\|");
+		for(int i=0 ; i<cartData.length ; i++){
+			if(cartData[0].length() == 1){
+				return Integer.parseInt(cartData[1]);
+			}
+			String[] cart = cartData[i].split(",");
+			if(id.equals(Long.parseLong(cart[0]))){
+				return Integer.parseInt(cart[1]);
+			}
+		}
+		return 0;
 	}
 }
