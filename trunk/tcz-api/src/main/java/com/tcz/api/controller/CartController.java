@@ -84,29 +84,24 @@ public class CartController {
 		return Message.success(data);
 	}
 	
+	// 3,2|1,1
 	private List<Long> getIds(String cartDataSel){
-		String[] cartData =  cartDataSel.split("\\|");
+		String idStr =  cartDataSel.split("\\|")[0];
+		String[] idsTmp = idStr.split(",");
 		List<Long> ids = new ArrayList<>();
-		for(int i=0 ; i<cartData.length ; i++){
-			if(cartData[0].length() == 1){
-				ids.add(Long.parseLong(cartData[0]));
-				return ids;
-			}
-			String[] cart = cartData[i].split(",");
-			ids.add(Long.parseLong(cart[0]));
+		for(int i=0 ; i<idsTmp.length ; i++){
+			String id = idsTmp[i];
+			ids.add(Long.parseLong(id));
 		}
 		return ids;
 	}
 	
 	private Integer getCount(String cartDataSel , Long id){
-		String[] cartData =  cartDataSel.split("\\|");
-		for(int i=0 ; i<cartData.length ; i++){
-			if(cartData[0].length() == 1){
-				return Integer.parseInt(cartData[1]);
-			}
-			String[] cart = cartData[i].split(",");
-			if(id.equals(Long.parseLong(cart[0]))){
-				return Integer.parseInt(cart[1]);
+		String[] ids =  cartDataSel.split("\\|")[0].split(",");
+		String[] nums = cartDataSel.split("\\|")[1].split(",");
+		for(int i=0 ; i<ids.length ; i++){
+			if(ids[i].equals(id.toString())){
+				return Integer.parseInt(nums[i]);
 			}
 		}
 		return 0;
