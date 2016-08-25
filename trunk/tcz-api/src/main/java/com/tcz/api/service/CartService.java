@@ -20,4 +20,12 @@ public interface CartService {
 	 */
 	List<Map<String, Object>> getCartItemInfo(Long id);
 	
+	
+	/**
+	 * 获取商品
+	 * @param id
+	 * @return
+	 */
+	String getGoodsSalingByGoodsID(String goodsId);
+	
 }

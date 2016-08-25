@@ -49,4 +49,16 @@ public class CartController {
 		return Message.success(result);
 	}
 	
+	// {"code":0,"NewCodeInfo":"7953087|72790|6|799|793|0"}
+	@RequestMapping("/getGoodsSalingByGoodsID")
+	public Message getGoodsSalingByGoodsID(String goodsId){
+		String result = "";
+		try {
+			result = cartService.getGoodsSalingByGoodsID(goodsId);
+		} catch (Exception e) {
+			logger.error(e.getMessage() , e);
+		}
+		return Message.success(result);
+	}
+	
 }

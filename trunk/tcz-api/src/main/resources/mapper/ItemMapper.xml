@@ -310,4 +310,13 @@
 		 #{id}  
 		</foreach> 
   </select>
+  
+  <select id="findByGoodsId" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tcz_item
+    	where goods_id = #{goodsId}
+  </select>
 </mapper>
