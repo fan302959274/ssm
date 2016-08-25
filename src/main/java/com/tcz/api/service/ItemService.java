@@ -15,6 +15,8 @@ public interface ItemService {
 	
 	public Item findById(Long id);
 	
+	public Item findByGoodsId(String goodsId);
+	
 	public List<Item> findByIds(List<Long> ids);
 	
 }

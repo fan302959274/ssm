@@ -64,4 +64,9 @@ public class ItemServiceImpl implements ItemService{
 		return itemMapper.findByIds(ids);
 	}
 
+	@Override
+	public Item findByGoodsId(String goodsId) {
+		return itemMapper.findByGoodsId(goodsId);
+	}
+
 }

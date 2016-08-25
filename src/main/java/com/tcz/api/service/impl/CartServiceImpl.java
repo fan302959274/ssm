@@ -25,7 +25,9 @@ public class CartServiceImpl implements CartService{
 		
 		System.out.println(cartDataSel);
 		Map<String, Object> data = new HashMap<>();
+		// 已经更新
 		data.put("listUpdate", Collections.emptyList());
+		// 已经结束
 		data.put("listOutDate", Collections.emptyList());
 		data.put("unvalid", "");
 		Integer count = 0;
@@ -94,6 +96,20 @@ public class CartServiceImpl implements CartService{
 			}
 		}
 		return 0;
+	}
+
+	// 7953087|72790|6|799|793|0
+	@Override
+	public String getGoodsSalingByGoodsID(String goodsId) {
+		Item item =  itemService.findByGoodsId(goodsId);
+		String result = "";
+		result += item.getId() + "|";
+		result += item.getPeriods() + "|";
+		result += item.getSales() + "|";
+		result += item.getPrice() + "|";
+		result += item.getPrice() - item.getSales() + "|";
+		result += "0";
+		return result;
 	}
 
 }
