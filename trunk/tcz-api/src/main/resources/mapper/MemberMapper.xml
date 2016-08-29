@@ -375,7 +375,8 @@
 		where id = #{id,jdbcType=BIGINT}
 	</update>
 
-	<select id="selectYunRecord" parameterType="java.lang.Long" resultType="java.util.Map">
+	<select id="selectYunRecord" parameterType="java.lang.Long"
+		resultType="java.util.Map">
 		SELECT
 		i.image as
 		image,i.name as name,i.status as status,
@@ -383,10 +384,12 @@
 		FROM
 		tcz_member
 		m
-		LEFT JOIN tcz_order o ON m.id = o.member_id
+		LEFT JOIN tcz_order o ON m.id =
+		o.member_id
 		LEFT JOIN tcz_order_detail
 		od ON o.id = od.order_id
-		LEFT JOIN tcz_item i ON od.item_id = i.id
+		LEFT JOIN
+		tcz_item i ON od.item_id = i.id
 		LEFT
 		JOIN (
 		SELECT
@@ -399,7 +402,23 @@
 		) enter ON i.id = enter.item_id
 		WHERE
 		m.is_deleted = 0
-		AND o.delete_flag = 0
-	    AND m.id = #{id,jdbcType=BIGINT}
+		AND
+		o.delete_flag = 0
+		AND m.id = #{id,jdbcType=BIGINT}
+	</select>
+
+	<select id="getMemberByAccount" parameterType="com.tcz.api.model.po.Member"
+		resultType="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tcz_member
+		<where>
+			<if test="mobilePhone != null">
+				and mobilePhone = #{mobilePhone,jdbcType=VARCHAR}
+			</if>
+			<if test="email != null">
+				and email = #{email,jdbcType=VARCHAR}
+			</if>
+		</where>
 	</select>
 </mapper>
