@@ -31,6 +31,25 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
+	
+	/**
+	 * 会员登录
+	 * @return
+	 */
+	@RequestMapping("/login")
+	public Boolean login(String account, String password){
+		try {
+			return memberService.login(account,password);
+		} catch (Exception e) {
+			log.error(e.getMessage() , e);
+			return false;
+		}
+	}
+	
+	/**
+	 * 云购记录
+	 * @return
+	 */
 	@RequestMapping("/yunRecord")
 	public Message getOrderById(){
 		try {
@@ -41,4 +60,31 @@ public class MemberController {
 			return Message.error();
 		}
 	}
+	/**
+	 * 获得的商品
+	 * @return
+	 */
+	@RequestMapping("/productHaving")
+	public Message productHaving(){
+		try {
+			return Message.success(null);
+		} catch (Exception e) {
+			log.error(e.getMessage() , e);
+			return Message.error();
+		}
+	}
+	/**
+	 * 我的关注
+	 * @return
+	 */
+	@RequestMapping("/myCollection")
+	public Message myCollection(){
+		try {
+			return Message.success(null);
+		} catch (Exception e) {
+			log.error(e.getMessage() , e);
+			return Message.error();
+		}
+	}
+	
 }
