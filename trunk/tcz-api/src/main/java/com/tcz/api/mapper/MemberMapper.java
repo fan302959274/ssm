@@ -19,4 +19,6 @@ public interface MemberMapper {
     int updateByPrimaryKey(Member record);
     
     List<Map<String, Object>> selectYunRecord(Long id);
+    
+    Member getMemberByAccount(Member member);
 }
