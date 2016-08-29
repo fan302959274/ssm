@@ -3,6 +3,8 @@ package com.tcz.api.service.impl;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.codec.digest.Md5Crypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +34,7 @@ public class MemberServiceImpl implements MemberService {
 		Member m = memberMapper.getMemberByAccount(member);
 		if (null == m) {
 			return false;
-		} else if (!password.equals(m.getPassword())) {
+		} else if (!DigestUtils.md5Hex(password).equals(m.getPassword())) {
 			return false;
 		}
 		return true;
