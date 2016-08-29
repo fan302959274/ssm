@@ -9,5 +9,17 @@ import java.util.Map;
  *
  */
 public interface MemberService {
+	 /**
+	  * 云购记录
+	  * @param id
+	  * @return
+	  */
 	 List<Map<String, Object>> selectYunRecord(Long id);
+	 /**
+	  * 登录
+	  * @param account
+	  * @param password
+	  * @return
+	  */
+	 Boolean login(String account,String password);
 }
