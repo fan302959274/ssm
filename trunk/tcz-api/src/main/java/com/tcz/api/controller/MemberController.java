@@ -37,7 +37,7 @@ public class MemberController {
 	@RequestMapping("/register")
 	public Boolean register(String account, String password){
 		try {
-			return memberService.login(account,password);
+			return memberService.register(account,password);
 		} catch (Exception e) {
 			log.error(e.getMessage() , e);
 			return false;
