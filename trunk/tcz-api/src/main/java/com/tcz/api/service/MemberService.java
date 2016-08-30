@@ -22,4 +22,12 @@ public interface MemberService {
 	  * @return
 	  */
 	 Boolean login(String account,String password);
+	 /**
+	  * 注册
+	  * @param account
+	  * @param password
+	  * @return
+	  */
+	 Boolean register(String account,String password);
+	 
 }
