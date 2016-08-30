@@ -407,8 +407,8 @@
 		AND m.id = #{id,jdbcType=BIGINT}
 	</select>
 
-	<!-- <select id="getMemberByAccount" parameterType="com.tcz.api.model.po.Member"
-		resultType="BaseResultMap">
+	<select id="getMemberByAccount" parameterType="com.tcz.api.model.po.Member"
+		resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
 		from tcz_member
@@ -420,5 +420,5 @@
 				and email = #{email,jdbcType=VARCHAR}
 			</if>
 		</where>
-	</select> -->
+	</select> 
 </mapper>
