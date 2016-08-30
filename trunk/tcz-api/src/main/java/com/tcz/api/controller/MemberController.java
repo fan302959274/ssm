@@ -28,9 +28,29 @@ public class MemberController {
 	
 	
 	/**
-	 * 会员登录
+	 * 会员注册
+	 * @param account
+	 * @param password
 	 * @return
 	 */
+	 
+	@RequestMapping("/register")
+	public Boolean register(String account, String password){
+		try {
+			return memberService.login(account,password);
+		} catch (Exception e) {
+			log.error(e.getMessage() , e);
+			return false;
+		}
+	}
+	
+	/**
+	 * 会员登录
+	 * @param account
+	 * @param password
+	 * @return
+	 */
+	
 	@RequestMapping("/login")
 	public Boolean login(String account, String password){
 		try {
@@ -45,6 +65,7 @@ public class MemberController {
 	 * 云购记录
 	 * @return
 	 */
+	
 	@RequestMapping("/yunRecord")
 	public Message getOrderById(){
 		try {
