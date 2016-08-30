@@ -39,4 +39,22 @@ public class MemberServiceImpl implements MemberService {
 		return true;
 	}
 
+	@Override
+	public Boolean register(String account, String password) {
+		Member member = new Member();
+		if (RegexUtils.isEmail(account)) {
+			member.setEmail(account);
+		} else if (RegexUtils.isMobileNO(account)) {
+			member.setMobilePhone(account);
+		}
+		Member m = memberMapper.getMemberByAccount(member);
+		if (null != m) {
+			return false;
+		}
+		member.setPassword(DigestUtils.md5Hex(password));//密码
+		member.setIsDeleted(0);//有效位
+		memberMapper.insertSelective(member);
+		return true;
+	}
+
 }
