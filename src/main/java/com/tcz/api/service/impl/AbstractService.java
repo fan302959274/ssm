@@ -30,7 +30,7 @@ public abstract class AbstractService<T, ID extends Serializable> implements Bas
 
 	@Override
 	public int updateByPrimaryKeySelective(T record) {
-		return baseMapper.updateByPrimaryKey(record);
+		return baseMapper.updateByPrimaryKeySelective(record);
 	}
 
 	@Override
