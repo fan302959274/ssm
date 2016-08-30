@@ -414,7 +414,7 @@
 		from tcz_member
 		<where>
 			<if test="mobilePhone != null">
-				and mobilePhone = #{mobilePhone,jdbcType=VARCHAR}
+				and mobile_phone = #{mobilePhone,jdbcType=VARCHAR}
 			</if>
 			<if test="email != null">
 				and email = #{email,jdbcType=VARCHAR}
