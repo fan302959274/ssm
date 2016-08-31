@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.tcz.api.mapper.MemberMapper;
 import com.tcz.api.model.po.Member;
 import com.tcz.api.service.MemberService;
+import com.tcz.api.utils.BeanUtils;
 import com.tcz.api.utils.RegexUtils;
 import com.tcz.api.utils.Response;
 import com.tcz.api.utils.ResultEnum;
@@ -26,8 +27,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Response<Member> login(String account, String password) {
-		Response<Member> resp = new Response<Member>();
+	public Response<Map<String, Object>> login(String account, String password) {
+		Response<Map<String, Object>> resp = new Response<Map<String, Object>>();
 		Member member = new Member();
 		try {
 			if (RegexUtils.isEmail(account)) {
@@ -43,7 +44,7 @@ public class MemberServiceImpl implements MemberService {
 				resp.setFacade(ResultEnum.PASSWORD_ERROR);
 				return resp;
 			}
-			resp.setResult(m);
+			resp.setResult(BeanUtils.beanToMap(m));
 		} catch (Exception e) {
 			resp.setFacade(ResultEnum.LOGIN_ERROR);
 		}
@@ -52,8 +53,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Response<Member> register(String account, String password) {
-		Response<Member> resp = new Response<Member>();
+	public Response<Map<String, Object>> register(String account, String password) {
+		Response<Map<String, Object>> resp = new Response<Map<String, Object>>();
 		Member member = new Member();
 		try {
 			if (RegexUtils.isEmail(account)) {
@@ -72,7 +73,7 @@ public class MemberServiceImpl implements MemberService {
 			member.setModifyDate(new Date());//修改日期
 			memberMapper.insertSelective(member);
 
-			resp.setResult(member);
+			resp.setResult(BeanUtils.beanToMap(member));
 		} catch (Exception e) {
 			resp.setFacade(ResultEnum.REGISTER_ERROR);
 		}
