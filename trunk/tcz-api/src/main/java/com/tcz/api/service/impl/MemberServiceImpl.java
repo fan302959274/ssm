@@ -13,7 +13,7 @@ import com.tcz.api.model.po.Member;
 import com.tcz.api.service.MemberService;
 import com.tcz.api.utils.BeanUtils;
 import com.tcz.api.utils.RegexUtils;
-import com.tcz.api.utils.Response;
+import com.tcz.api.utils.ResponseUtil;
 import com.tcz.api.utils.ResultEnum;
 
 @Service("memberServiceImpl")
@@ -27,8 +27,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Response<Map<String, Object>> login(String account, String password) {
-		Response<Map<String, Object>> resp = new Response<Map<String, Object>>();
+	public ResponseUtil<Map<String, Object>> login(String account, String password) {
+		ResponseUtil<Map<String, Object>> resp = new ResponseUtil<Map<String, Object>>();
 		Member member = new Member();
 		try {
 			if (RegexUtils.isEmail(account)) {
@@ -53,8 +53,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Response<Map<String, Object>> register(String account, String password) {
-		Response<Map<String, Object>> resp = new Response<Map<String, Object>>();
+	public ResponseUtil<Map<String, Object>> register(String account, String password) {
+		ResponseUtil<Map<String, Object>> resp = new ResponseUtil<Map<String, Object>>();
 		Member member = new Member();
 		try {
 			if (RegexUtils.isEmail(account)) {
