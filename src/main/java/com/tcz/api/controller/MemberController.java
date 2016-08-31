@@ -7,9 +7,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tcz.api.model.po.Member;
 import com.tcz.api.service.MemberService;
+import com.tcz.api.utils.Response;
 import com.tcz.api.utils.ResultEnum;
 import com.tcz.core.rest.Message;
 
@@ -36,13 +39,8 @@ public class MemberController {
 	 */
 	 
 	@RequestMapping("/register")
-	public ResultEnum register(String account, String password){
-		try {
-			return memberService.register(account,password);
-		} catch (Exception e) {
-			log.error(e.getMessage() , e);
-			return ResultEnum.REGISTER_ERROR;
-		}
+	public Response<Member> register(String account, String password){
+		return memberService.register(account,password);
 	}
 	
 	/**
@@ -53,13 +51,9 @@ public class MemberController {
 	 */
 	
 	@RequestMapping("/login")
-	public ResultEnum login(String account, String password){
-		try {
+	@ResponseBody
+	public Response<Member>  login(String account, String password){
 			return memberService.login(account,password);
-		} catch (Exception e) {
-			log.error(e.getMessage() , e);
-			return ResultEnum.LOGIN_ERROR;
-		}
 	}
 	
 	/**
