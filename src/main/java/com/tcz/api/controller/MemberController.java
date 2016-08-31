@@ -39,7 +39,7 @@ public class MemberController {
 	 */
 	 
 	@RequestMapping("/register")
-	public Response<Member> register(String account, String password){
+	public Response<Map<String, Object>> register(String account, String password){
 		return memberService.register(account,password);
 	}
 	
@@ -52,7 +52,7 @@ public class MemberController {
 	
 	@RequestMapping("/login")
 	@ResponseBody
-	public Response<Member>  login(String account, String password){
+	public Response<Map<String, Object>>  login(String account, String password){
 			return memberService.login(account,password);
 	}
 	
