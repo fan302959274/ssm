@@ -13,8 +13,8 @@ import com.tcz.api.model.po.Member;
 import com.tcz.api.service.MemberService;
 import com.tcz.api.utils.BeanUtils;
 import com.tcz.api.utils.RegexUtils;
-import com.tcz.api.utils.ResponseUtil;
-import com.tcz.api.utils.ResultEnum;
+import com.tcz.core.rest.ResponseUtil;
+import com.tcz.core.rest.ResultEnum;
 
 @Service("memberServiceImpl")
 public class MemberServiceImpl implements MemberService {
