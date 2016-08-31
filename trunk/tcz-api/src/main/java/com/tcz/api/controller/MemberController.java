@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tcz.api.service.MemberService;
-import com.tcz.api.utils.ResponseUtil;
 import com.tcz.core.rest.Message;
+import com.tcz.core.rest.ResponseUtil;
 
 /**
  * 会员
@@ -53,6 +53,7 @@ public class MemberController {
 	public ResponseUtil<Map<String, Object>>  login(String account, String password){
 			return memberService.login(account,password);
 	}
+	
 	
 	/**
 	 * 云购记录
