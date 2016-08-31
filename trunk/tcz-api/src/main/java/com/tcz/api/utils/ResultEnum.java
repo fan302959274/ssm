@@ -1,5 +1,13 @@
 package com.tcz.api.utils;
 
+/**
+ * 客户端返回
+ * code: 响应结果码
+ * msg:  结果描述，给调用方系统看的描述信息
+ * tips: 返回给调用方，需要显示给用户的的友好提示信息，请谨慎定义 
+ * @author cf
+ *
+ */
 public enum ResultEnum {
 	SUCCESS("1000", "成功", "返回正常"),
 	// 登录相关
