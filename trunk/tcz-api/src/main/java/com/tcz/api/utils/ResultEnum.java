@@ -9,9 +9,9 @@ public enum ResultEnum {
 	REGISTER_ERROR("200000", "注册异常", "注册失败!"), ACCOUNT_REGISTERED("200001",
 			"帐号已注册", "您的帐号已注册");
 
-	private String code;
-	private String msg;
-	private String tips;
+	public String code;
+	public String msg;
+	public String tips;
 
 	private ResultEnum(String code, String msg, String tips) {
 		this.code = code;
