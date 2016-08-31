@@ -96,4 +96,19 @@ public class MemberServiceImpl implements MemberService {
 		return resp;
 	}
 
+	@Override
+	public ResponseUtil<List<Map<String, Object>>> productHaving(Long id) {
+		ResponseUtil<List<Map<String, Object>>> resp = new ResponseUtil<List<Map<String,Object>>>();
+		try{
+			List<Map<String, Object>> yunRecordList = memberMapper.productHaving(id);
+			if(null!=yunRecordList&&yunRecordList.size()>0){
+				resp.setResult(yunRecordList);
+			}
+		}catch(Exception e){
+			log.info("获取我的商品异常"+e.getMessage());
+			resp.setFacade(ResultEnum.ERROR);
+		}
+		return resp;
+	}
+
 }

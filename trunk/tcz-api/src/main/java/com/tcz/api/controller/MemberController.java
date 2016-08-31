@@ -52,7 +52,6 @@ public class MemberController {
 	 */
 
 	@RequestMapping("/login")
-	@ResponseBody
 	public ResponseUtil<Map<String, Object>> login(String account,
 			String password) {
 		return memberService.login(account, password);
@@ -74,13 +73,8 @@ public class MemberController {
 	 * @return
 	 */
 	@RequestMapping("/productHaving")
-	public Message productHaving() {
-		try {
-			return Message.success(null);
-		} catch (Exception e) {
-			log.error(e.getMessage(), e);
-			return Message.error();
-		}
+	public ResponseUtil<List<Map<String, Object>>> productHaving() {
+			return  memberService.productHaving(1l);
 	}
 
 	/**
