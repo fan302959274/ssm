@@ -10,10 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tcz.api.model.po.Member;
 import com.tcz.api.service.MemberService;
-import com.tcz.api.utils.Response;
-import com.tcz.api.utils.ResultEnum;
+import com.tcz.api.utils.ResponseUtil;
 import com.tcz.core.rest.Message;
 
 /**
@@ -39,7 +37,7 @@ public class MemberController {
 	 */
 	 
 	@RequestMapping("/register")
-	public Response<Map<String, Object>> register(String account, String password){
+	public ResponseUtil<Map<String, Object>> register(String account, String password){
 		return memberService.register(account,password);
 	}
 	
@@ -52,7 +50,7 @@ public class MemberController {
 	
 	@RequestMapping("/login")
 	@ResponseBody
-	public Response<Map<String, Object>>  login(String account, String password){
+	public ResponseUtil<Map<String, Object>>  login(String account, String password){
 			return memberService.login(account,password);
 	}
 	
