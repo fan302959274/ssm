@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,12 +20,23 @@ import com.tcz.core.rest.ResultEnum;
 
 @Service("memberServiceImpl")
 public class MemberServiceImpl implements MemberService {
+	private Logger log = LoggerFactory.getLogger(getClass());
 	@Autowired
 	MemberMapper memberMapper;
 
 	@Override
-	public List<Map<String, Object>> selectYunRecord(Long id) {
-		return memberMapper.selectYunRecord(id);
+	public ResponseUtil<List<Map<String, Object>>> selectYunRecord(Long id) {
+		ResponseUtil<List<Map<String, Object>>> resp = new ResponseUtil<List<Map<String,Object>>>();
+		try{
+			List<Map<String, Object>> yunRecordList = memberMapper.selectYunRecord(id);
+			if(null!=yunRecordList&&yunRecordList.size()>0){
+				resp.setResult(yunRecordList);
+			}
+		}catch(Exception e){
+			log.info("获取云购记录异常"+e.getMessage());
+			resp.setFacade(ResultEnum.ERROR);
+		}
+		return resp;
 	}
 
 	@Override
@@ -46,6 +59,7 @@ public class MemberServiceImpl implements MemberService {
 			}
 			resp.setResult(BeanUtils.beanToMap(m));
 		} catch (Exception e) {
+			log.info("登录异常"+e.getMessage());
 			resp.setFacade(ResultEnum.LOGIN_ERROR);
 		}
 
@@ -75,6 +89,7 @@ public class MemberServiceImpl implements MemberService {
 
 			resp.setResult(BeanUtils.beanToMap(member));
 		} catch (Exception e) {
+			log.info("注册异常"+e.getMessage());
 			resp.setFacade(ResultEnum.REGISTER_ERROR);
 		}
 

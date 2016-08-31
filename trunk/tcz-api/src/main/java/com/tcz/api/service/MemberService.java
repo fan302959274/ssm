@@ -17,7 +17,7 @@ public interface MemberService {
 	  * @param id
 	  * @return
 	  */
-	 List<Map<String, Object>> selectYunRecord(Long id);
+	ResponseUtil<List<Map<String, Object>>> selectYunRecord(Long id);
 	 /**
 	  * 登录
 	  * @param account
