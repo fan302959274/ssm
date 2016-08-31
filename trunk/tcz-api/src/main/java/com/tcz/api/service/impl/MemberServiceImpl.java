@@ -1,5 +1,6 @@
 package com.tcz.api.service.impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -67,6 +68,8 @@ public class MemberServiceImpl implements MemberService {
 			}
 			member.setPassword(DigestUtils.md5Hex(password));// 密码
 			member.setIsDeleted(0);// 有效位
+			member.setCreateDate(new Date());//创建日期
+			member.setModifyDate(new Date());//修改日期
 			memberMapper.insertSelective(member);
 
 			resp.setResult(member);
