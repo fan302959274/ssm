@@ -2,6 +2,8 @@ package com.tcz.api.utils;
 
 import java.io.Serializable;
 
+import com.tcz.api.model.enums.ResultEnum;
+
 public class ResponseUtil<T> implements Serializable {
 	
 	private static final long serialVersionUID = 1L;

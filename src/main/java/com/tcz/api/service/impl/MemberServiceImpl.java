@@ -11,12 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tcz.api.mapper.MemberMapper;
+import com.tcz.api.model.enums.ResultEnum;
 import com.tcz.api.model.po.Member;
 import com.tcz.api.service.MemberService;
 import com.tcz.api.utils.BeanUtils;
 import com.tcz.api.utils.RegexUtils;
 import com.tcz.api.utils.ResponseUtil;
-import com.tcz.api.utils.ResultEnum;
 
 @Service("memberServiceImpl")
 public class MemberServiceImpl implements MemberService {
