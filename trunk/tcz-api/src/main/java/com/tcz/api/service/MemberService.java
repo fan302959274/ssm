@@ -25,13 +25,13 @@ public interface MemberService {
 	  * @param password
 	  * @return
 	  */
-	 Response<Member> login(String account,String password);
+	 Response<Map<String, Object>> login(String account,String password);
 	 /**
 	  * 注册
 	  * @param account
 	  * @param password
 	  * @return
 	  */
-	 Response<Member> register(String account,String password);
+	 Response<Map<String, Object>> register(String account,String password);
 	 
 }
