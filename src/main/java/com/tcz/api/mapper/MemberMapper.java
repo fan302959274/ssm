@@ -20,5 +20,7 @@ public interface MemberMapper {
     
     List<Map<String, Object>> selectYunRecord(Long id);
     
+    List<Map<String, Object>> productHaving(Long id);
+    
     Member getMemberByAccount(Member member);
 }
