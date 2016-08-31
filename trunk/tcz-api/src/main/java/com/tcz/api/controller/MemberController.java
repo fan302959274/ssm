@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tcz.api.service.MemberService;
+import com.tcz.api.utils.ResultEnum;
 import com.tcz.core.rest.Message;
 
 /**
@@ -35,12 +36,12 @@ public class MemberController {
 	 */
 	 
 	@RequestMapping("/register")
-	public Boolean register(String account, String password){
+	public ResultEnum register(String account, String password){
 		try {
 			return memberService.register(account,password);
 		} catch (Exception e) {
 			log.error(e.getMessage() , e);
-			return false;
+			return ResultEnum.REGISTER_ERROR;
 		}
 	}
 	
@@ -52,12 +53,12 @@ public class MemberController {
 	 */
 	
 	@RequestMapping("/login")
-	public Boolean login(String account, String password){
+	public ResultEnum login(String account, String password){
 		try {
 			return memberService.login(account,password);
 		} catch (Exception e) {
 			log.error(e.getMessage() , e);
-			return false;
+			return ResultEnum.LOGIN_ERROR;
 		}
 	}
 	
