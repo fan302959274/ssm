@@ -2,7 +2,7 @@ package com.tcz.api.utils;
 
 import java.io.Serializable;
 
-public class Response<T> implements Serializable {
+public class ResponseUtil<T> implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
