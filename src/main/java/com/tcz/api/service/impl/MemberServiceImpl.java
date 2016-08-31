@@ -37,8 +37,10 @@ public class MemberServiceImpl implements MemberService {
 			Member m = memberMapper.getMemberByAccount(member);
 			if (null == m) {
 				resp.setFacade(ResultEnum.ACCOUNT_NO_REGISTER);
+				return resp;
 			} else if (!DigestUtils.md5Hex(password).equals(m.getPassword())) {
 				resp.setFacade(ResultEnum.PASSWORD_ERROR);
+				return resp;
 			}
 			resp.setResult(m);
 		} catch (Exception e) {
@@ -61,6 +63,7 @@ public class MemberServiceImpl implements MemberService {
 			Member m = memberMapper.getMemberByAccount(member);
 			if (null != m) {
 				resp.setFacade(ResultEnum.ACCOUNT_REGISTERED);
+				return resp;
 			}
 			member.setPassword(DigestUtils.md5Hex(password));// 密码
 			member.setIsDeleted(0);// 有效位
