@@ -7,12 +7,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tcz.api.service.MemberService;
+import com.tcz.api.utils.ResponseUtil;
 import com.tcz.core.rest.Message;
-import com.tcz.core.rest.ResponseUtil;
 
 /**
  * 会员
@@ -90,6 +89,14 @@ public class MemberController {
 			log.error(e.getMessage(), e);
 			return Message.error();
 		}
+	}
+	
+	/**
+	 * 消费记录
+	 * @return
+	 */
+	public ResponseUtil<List<Map<String, Object>>> consumeRecord(){
+		return null;
 	}
 
 }
