@@ -11,6 +11,7 @@ import com.tcz.api.mapper.MemberMapper;
 import com.tcz.api.model.po.Member;
 import com.tcz.api.service.MemberService;
 import com.tcz.api.utils.RegexUtils;
+import com.tcz.api.utils.ResultEnum;
 
 @Service("memberServiceImpl")
 public class MemberServiceImpl implements MemberService {
@@ -23,7 +24,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Boolean login(String account, String password) {
+	public ResultEnum login(String account, String password) {
 		Member member = new Member();
 		if (RegexUtils.isEmail(account)) {
 			member.setEmail(account);
@@ -32,15 +33,15 @@ public class MemberServiceImpl implements MemberService {
 		}
 		Member m = memberMapper.getMemberByAccount(member);
 		if (null == m) {
-			return false;
+			return ResultEnum.ACCOUNT_NO_REGISTER;
 		} else if (!DigestUtils.md5Hex(password).equals(m.getPassword())) {
-			return false;
+			return ResultEnum.PASSWORD_ERROR;
 		}
-		return true;
+		return ResultEnum.SUCCESS;
 	}
 
 	@Override
-	public Boolean register(String account, String password) {
+	public ResultEnum register(String account, String password) {
 		Member member = new Member();
 		if (RegexUtils.isEmail(account)) {
 			member.setEmail(account);
@@ -49,12 +50,12 @@ public class MemberServiceImpl implements MemberService {
 		}
 		Member m = memberMapper.getMemberByAccount(member);
 		if (null != m) {
-			return false;
+			return ResultEnum.ACCOUNT_REGISTERED;
 		}
 		member.setPassword(DigestUtils.md5Hex(password));//密码
 		member.setIsDeleted(0);//有效位
 		memberMapper.insertSelective(member);
-		return true;
+		return ResultEnum.SUCCESS;
 	}
 
 }

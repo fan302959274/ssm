@@ -3,6 +3,8 @@ package com.tcz.api.service;
 import java.util.List;
 import java.util.Map;
 
+import com.tcz.api.utils.ResultEnum;
+
 /**
  * 
  * @author cf
@@ -21,13 +23,13 @@ public interface MemberService {
 	  * @param password
 	  * @return
 	  */
-	 Boolean login(String account,String password);
+	 ResultEnum login(String account,String password);
 	 /**
 	  * 注册
 	  * @param account
 	  * @param password
 	  * @return
 	  */
-	 Boolean register(String account,String password);
+	 ResultEnum register(String account,String password);
 	 
 }
