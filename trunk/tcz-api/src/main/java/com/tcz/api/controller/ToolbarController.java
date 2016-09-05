@@ -27,4 +27,9 @@ public class ToolbarController {
 		member.setName("candy.tam");
 		return Message.success(member);
 	}
+	
+	@RequestMapping("/userLogin")
+	public Message userLogin(String name , String pwd , String auth){
+		return Message.build("201", "");
+	}
 }
