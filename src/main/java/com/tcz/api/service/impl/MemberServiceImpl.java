@@ -26,21 +26,23 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public ResponseUtil<List<Map<String, Object>>> selectYunRecord(Long id) {
-		ResponseUtil<List<Map<String, Object>>> resp = new ResponseUtil<List<Map<String,Object>>>();
-		try{
-			List<Map<String, Object>> yunRecordList = memberMapper.selectYunRecord(id);
-			if(null!=yunRecordList&&yunRecordList.size()>0){
+		ResponseUtil<List<Map<String, Object>>> resp = new ResponseUtil<List<Map<String, Object>>>();
+		try {
+			List<Map<String, Object>> yunRecordList = memberMapper
+					.selectYunRecord(id);
+			if (null != yunRecordList && yunRecordList.size() > 0) {
 				resp.setResult(yunRecordList);
 			}
-		}catch(Exception e){
-			log.info("获取云购记录异常"+e.getMessage());
+		} catch (Exception e) {
+			log.info("获取云购记录异常" + e.getMessage());
 			resp.setFacade(ResultEnum.ERROR);
 		}
 		return resp;
 	}
 
 	@Override
-	public ResponseUtil<Map<String, Object>> login(String account, String password) {
+	public ResponseUtil<Map<String, Object>> login(String account,
+			String password) {
 		ResponseUtil<Map<String, Object>> resp = new ResponseUtil<Map<String, Object>>();
 		Member member = new Member();
 		try {
@@ -48,6 +50,8 @@ public class MemberServiceImpl implements MemberService {
 				member.setEmail(account);
 			} else if (RegexUtils.isMobileNO(account)) {
 				member.setMobilePhone(account);
+			} else {
+				member.setMobilePhone(account);// 默认是手机号(排除后端出现查询出多个结果集)
 			}
 			Member m = memberMapper.getMemberByAccount(member);
 			if (null == m) {
@@ -59,7 +63,7 @@ public class MemberServiceImpl implements MemberService {
 			}
 			resp.setResult(BeanUtils.beanToMap(m));
 		} catch (Exception e) {
-			log.info("登录异常"+e.getMessage());
+			log.info("登录异常" + e.getMessage());
 			resp.setFacade(ResultEnum.LOGIN_ERROR);
 		}
 
@@ -67,7 +71,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public ResponseUtil<Map<String, Object>> register(String account, String password) {
+	public ResponseUtil<Map<String, Object>> register(String account,
+			String password) {
 		ResponseUtil<Map<String, Object>> resp = new ResponseUtil<Map<String, Object>>();
 		Member member = new Member();
 		try {
@@ -75,6 +80,8 @@ public class MemberServiceImpl implements MemberService {
 				member.setEmail(account);
 			} else if (RegexUtils.isMobileNO(account)) {
 				member.setMobilePhone(account);
+			} else {
+				member.setMobilePhone(account);// 默认是手机号(排除后端出现查询出多个结果集)
 			}
 			Member m = memberMapper.getMemberByAccount(member);
 			if (null != m) {
@@ -83,13 +90,13 @@ public class MemberServiceImpl implements MemberService {
 			}
 			member.setPassword(DigestUtils.md5Hex(password));// 密码
 			member.setIsDeleted(0);// 有效位
-			member.setCreateDate(new Date());//创建日期
-			member.setModifyDate(new Date());//修改日期
+			member.setCreateDate(new Date());// 创建日期
+			member.setModifyDate(new Date());// 修改日期
 			memberMapper.insertSelective(member);
 
 			resp.setResult(BeanUtils.beanToMap(member));
 		} catch (Exception e) {
-			log.info("注册异常"+e.getMessage());
+			log.info("注册异常" + e.getMessage());
 			resp.setFacade(ResultEnum.REGISTER_ERROR);
 		}
 
@@ -98,14 +105,15 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public ResponseUtil<List<Map<String, Object>>> productHaving(Long id) {
-		ResponseUtil<List<Map<String, Object>>> resp = new ResponseUtil<List<Map<String,Object>>>();
-		try{
-			List<Map<String, Object>> yunRecordList = memberMapper.productHaving(id);
-			if(null!=yunRecordList&&yunRecordList.size()>0){
+		ResponseUtil<List<Map<String, Object>>> resp = new ResponseUtil<List<Map<String, Object>>>();
+		try {
+			List<Map<String, Object>> yunRecordList = memberMapper
+					.productHaving(id);
+			if (null != yunRecordList && yunRecordList.size() > 0) {
 				resp.setResult(yunRecordList);
 			}
-		}catch(Exception e){
-			log.info("获取我的商品异常"+e.getMessage());
+		} catch (Exception e) {
+			log.info("获取我的商品异常" + e.getMessage());
 			resp.setFacade(ResultEnum.ERROR);
 		}
 		return resp;
