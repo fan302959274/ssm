@@ -39,7 +39,7 @@ public class MemberServiceImpl implements MemberService {
 		}
 		return resp;
 	}
-
+	/**帐号未不存在、验证码错误、登录密码错误、帐号已被冻结、此账号未激活、密码被系统锁定、失败次数超限，被冻结5分钟、失败次数超限，IP被冻结*/
 	@Override
 	public ResponseUtil<Map<String, Object>> login(String account,
 			String password) {
@@ -50,14 +50,37 @@ public class MemberServiceImpl implements MemberService {
 				member.setEmail(account);
 			} else if (RegexUtils.isMobileNO(account)) {
 				member.setMobilePhone(account);
-			} else {
-				member.setMobilePhone(account);// 默认是手机号(排除后端出现查询出多个结果集)
+			} else{
+				//输入帐号有误
+				resp.setFacade(ResultEnum.ACCOUNT_ERROR);
+				return resp;
 			}
 			Member m = memberMapper.getMemberByAccount(member);
 			if (null == m) {
 				resp.setFacade(ResultEnum.ACCOUNT_NO_REGISTER);
 				return resp;
-			} else if (!DigestUtils.md5Hex(password).equals(m.getPassword())) {
+			}else if(0 != m.getIsLocked()){
+				resp.setFacade(ResultEnum.PASSWORD_LOCKED);
+				return resp;
+			}else if(1 != m.getIsEnabled()){
+				resp.setFacade(ResultEnum.ACCOUNT_NO_ENABLED);
+				return resp;
+			}else if(m.getLoginFailureCount()>=3){
+				//错误三次锁5分钟
+				resp.setFacade(ResultEnum.PASSWORD_LOCKED_FIVEMIN);
+				return resp;
+			}else if (!DigestUtils.md5Hex(password).equals(m.getPassword())) {
+				//更新登录错误次数
+				Integer loginFailureCount = (null==m.getLoginFailureCount()?0:m.getLoginFailureCount());
+				loginFailureCount+=1;
+				Member record = new Member();
+				record.setId(m.getId());
+				record.setLoginFailureCount(loginFailureCount);
+				if(loginFailureCount>=5){
+					record.setIsLocked(1);//错误5次直接锁住
+				}
+				memberMapper.updateByPrimaryKeySelective(record);
+				
 				resp.setFacade(ResultEnum.PASSWORD_ERROR);
 				return resp;
 			}
@@ -89,6 +112,9 @@ public class MemberServiceImpl implements MemberService {
 				return resp;
 			}
 			member.setPassword(DigestUtils.md5Hex(password));// 密码
+			member.setIsEnabled(1);// 是否激活
+			member.setIsLocked(0);//是否被锁
+			member.setLoginFailureCount(0);//登录失败次数
 			member.setIsDeleted(0);// 有效位
 			member.setCreateDate(new Date());// 创建日期
 			member.setModifyDate(new Date());// 修改日期
