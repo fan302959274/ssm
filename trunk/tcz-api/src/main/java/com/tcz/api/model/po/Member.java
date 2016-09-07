@@ -263,4 +263,45 @@ public class Member {
     public void setIsDeleted(Integer isDeleted) {
         this.isDeleted = isDeleted;
     }
+
+    public Member(){
+    	super();
+    }
+	public Member(Long id, Date createDate, Date modifyDate, String address,
+			BigDecimal amount, BigDecimal balance, BigDecimal commission,
+			Date birth, String email, Integer gender, Integer isEnabled,
+			Integer isLocked, Date lockedDate, Date loginDate,
+			Integer loginFailureCount, String loginIp, String mobilePhone,
+			String name, String userPhoto, String password, String fixedPhone,
+			Long point, String registerIp, Long areaId, Long memberRankId,
+			Integer isDeleted) {
+		this.id = id;
+		this.createDate = createDate;
+		this.modifyDate = modifyDate;
+		this.address = address;
+		this.amount = amount;
+		this.balance = balance;
+		this.commission = commission;
+		this.birth = birth;
+		this.email = email;
+		this.gender = gender;
+		this.isEnabled = isEnabled;
+		this.isLocked = isLocked;
+		this.lockedDate = lockedDate;
+		this.loginDate = loginDate;
+		this.loginFailureCount = loginFailureCount;
+		this.loginIp = loginIp;
+		this.mobilePhone = mobilePhone;
+		this.name = name;
+		this.userPhoto = userPhoto;
+		this.password = password;
+		this.fixedPhone = fixedPhone;
+		this.point = point;
+		this.registerIp = registerIp;
+		this.areaId = areaId;
+		this.memberRankId = memberRankId;
+		this.isDeleted = isDeleted;
+	}
+    
+    
 }

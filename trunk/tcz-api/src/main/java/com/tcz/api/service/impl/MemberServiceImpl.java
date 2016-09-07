@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.lang3.time.DateUtils;
+import org.assertj.core.util.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,7 +67,7 @@ public class MemberServiceImpl implements MemberService {
 			}else if(1 != m.getIsEnabled()){
 				resp.setFacade(ResultEnum.ACCOUNT_NO_ENABLED);
 				return resp;
-			}else if(m.getLoginFailureCount()>=3){
+			}else if(m.getLoginFailureCount()>=3&&null!=m.getLoginDate()&&(new Date().getTime()-m.getLoginDate().getTime())<5*60*1000){
 				//错误三次锁5分钟
 				resp.setFacade(ResultEnum.PASSWORD_LOCKED_FIVEMIN);
 				return resp;
@@ -76,6 +78,7 @@ public class MemberServiceImpl implements MemberService {
 				Member record = new Member();
 				record.setId(m.getId());
 				record.setLoginFailureCount(loginFailureCount);
+				record.setLoginDate(new Date());
 				if(loginFailureCount>=5){
 					record.setIsLocked(1);//错误5次直接锁住
 				}
@@ -84,6 +87,13 @@ public class MemberServiceImpl implements MemberService {
 				resp.setFacade(ResultEnum.PASSWORD_ERROR);
 				return resp;
 			}
+			//登录成功清空登录失败次数
+			Member record = new Member();
+			record.setId(m.getId());
+			record.setLoginFailureCount(0);
+			record.setLoginDate(new Date());
+			memberMapper.updateByPrimaryKeySelective(record);
+			
 			resp.setResult(BeanUtils.beanToMap(m));
 		} catch (Exception e) {
 			log.info("登录异常" + e.getMessage());
