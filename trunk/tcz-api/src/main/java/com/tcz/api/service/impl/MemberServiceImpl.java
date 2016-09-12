@@ -64,34 +64,36 @@ public class MemberServiceImpl implements MemberService {
 			}
 
 			Member m = memberMapper.getMemberByAccount(member);
-			//帐号未注册
+			// 帐号未注册
 			if (null == m) {
 				resp.setFacade(ResultEnum.ACCOUNT_NO_REGISTER);
 				return resp;
 			}
-			//验证码输入有误
+			boolean captchaValidate = true;
+			// 验证码输入有误
 			if (null != captcha && !"".equals(captcha)) {
 				if (!captchaService.isValid(captchaId, captcha)) {
+					captchaValidate = false;
 					resp.setFacade(ResultEnum.VALIDATECODE_ERROR);
 					return resp;
 				}
 			}
-			//是否被锁
+			// 是否被锁
 			if (0 != m.getIsLocked()) {
 				resp.setFacade(ResultEnum.PASSWORD_LOCKED);
 				return resp;
 			}
-			//是否激活
+			// 是否激活
 			if (1 != m.getIsEnabled()) {
 				resp.setFacade(ResultEnum.ACCOUNT_NO_ENABLED);
 				return resp;
 			}
-			//验证码错误,密码被锁5分钟
+			// 验证码错误,密码被锁5分钟
 			if (m.getLoginFailureCount() >= 3
 					&& null != m.getLoginDate()
 					&& (new Date().getTime() - m.getLoginDate().getTime()) < 5 * 60 * 1000) {
 				if (null != captcha && !"".equals(captcha)) {
-					if (!captchaService.isValid(captchaId, captcha)) {
+					if (!captchaValidate) {
 						resp.setFacade(ResultEnum.VALIDATECODE_ERROR);
 						return resp;
 					}
@@ -101,7 +103,7 @@ public class MemberServiceImpl implements MemberService {
 					return resp;
 				}
 			}
-			//密码错误(5次直接锁住)
+			// 密码错误(5次直接锁住)
 			if (!DigestUtils.md5Hex(password).equals(m.getPassword())) {
 				// 更新登录错误次数
 				Integer loginFailureCount = (null == m.getLoginFailureCount() ? 0
@@ -112,6 +114,7 @@ public class MemberServiceImpl implements MemberService {
 				record.setLoginFailureCount(loginFailureCount);
 				record.setLoginDate(new Date());
 				if (loginFailureCount >= 5) {
+					record.setLockedDate(new Date());// 被锁日期
 					record.setIsLocked(1);// 错误5次直接锁住
 				}
 				memberMapper.updateByPrimaryKeySelective(record);
