@@ -34,7 +34,7 @@ public interface MemberService {
 	 * @param password
 	 * @return
 	 */
-	ResponseUtil<Map<String, Object>> login(String account, String password);
+	ResponseUtil<Map<String, Object>> login(String account, String password,String captcha,String captchaId);
 
 	/**
 	 * 注册
