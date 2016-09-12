@@ -33,9 +33,6 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
-	@Autowired
-	CaptchaService captchaService;
-
 	/**
 	 * 会员注册
 	 * 
@@ -61,16 +58,8 @@ public class MemberController {
 	@RequestMapping("/login")
 	public ResponseUtil<Map<String, Object>> login(HttpServletRequest request,String account,
 			String password,String captcha) {
-		ResponseUtil<Map<String, Object>> resp = new ResponseUtil<Map<String,Object>>();
 		String captchaId = request.getSession().getId();
-		if(null!=captcha&&!"".equals(captcha)){
-			if(!captchaService.isValid(captchaId, captcha)){
-				resp.setFacade(ResultEnum.VALIDATECODE_ERROR);
-				return resp;
-			}	
-		}
-		
-		return memberService.login(account, password);
+		return memberService.login(account, password,captcha,captchaId);
 	}
 
 	/**
