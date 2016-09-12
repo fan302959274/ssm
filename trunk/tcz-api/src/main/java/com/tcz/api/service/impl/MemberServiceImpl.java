@@ -69,15 +69,6 @@ public class MemberServiceImpl implements MemberService {
 				resp.setFacade(ResultEnum.ACCOUNT_NO_REGISTER);
 				return resp;
 			}
-			boolean captchaValidate = true;
-			// 验证码输入有误
-			if (null != captcha && !"".equals(captcha)) {
-				if (!captchaService.isValid(captchaId, captcha)) {
-					captchaValidate = false;
-					resp.setFacade(ResultEnum.VALIDATECODE_ERROR);
-					return resp;
-				}
-			}
 			// 是否被锁
 			if (0 != m.getIsLocked()) {
 				resp.setFacade(ResultEnum.PASSWORD_LOCKED);
@@ -88,12 +79,14 @@ public class MemberServiceImpl implements MemberService {
 				resp.setFacade(ResultEnum.ACCOUNT_NO_ENABLED);
 				return resp;
 			}
+			boolean captchaValidate = true;
 			// 验证码错误,密码被锁5分钟
 			if (m.getLoginFailureCount() >= 3
 					&& null != m.getLoginDate()
 					&& (new Date().getTime() - m.getLoginDate().getTime()) < 5 * 60 * 1000) {
 				if (null != captcha && !"".equals(captcha)) {
-					if (!captchaValidate) {
+					if (!captchaService.isValid(captchaId, captcha)) {
+						captchaValidate = false;
 						resp.setFacade(ResultEnum.VALIDATECODE_ERROR);
 						return resp;
 					}
@@ -121,6 +114,13 @@ public class MemberServiceImpl implements MemberService {
 
 				resp.setFacade(ResultEnum.PASSWORD_ERROR);
 				return resp;
+			}
+			// 验证码输入有误
+			if (null != captcha && !"".equals(captcha)) {
+				if (!captchaValidate) {
+					resp.setFacade(ResultEnum.VALIDATECODE_ERROR);
+					return resp;
+				}
 			}
 			// 登录成功清空登录失败次数
 			Member record = new Member();
