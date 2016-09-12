@@ -79,22 +79,13 @@ public class MemberServiceImpl implements MemberService {
 				resp.setFacade(ResultEnum.ACCOUNT_NO_ENABLED);
 				return resp;
 			}
-			boolean captchaValidate = true;
 			// 验证码错误,密码被锁5分钟
 			if (m.getLoginFailureCount() >= 3
 					&& null != m.getLoginDate()
 					&& (new Date().getTime() - m.getLoginDate().getTime()) < 5 * 60 * 1000) {
-				if (null != captcha && !"".equals(captcha)) {
-					if (!captchaService.isValid(captchaId, captcha)) {
-						captchaValidate = false;
-						resp.setFacade(ResultEnum.VALIDATECODE_ERROR);
-						return resp;
-					}
-				} else {
-					// 错误三次锁5分钟
-					resp.setFacade(ResultEnum.PASSWORD_LOCKED_FIVEMIN);
-					return resp;
-				}
+				// 错误三次锁5分钟
+				resp.setFacade(ResultEnum.PASSWORD_LOCKED_FIVEMIN);
+				return resp;
 			}
 			// 密码错误(5次直接锁住)
 			if (!DigestUtils.md5Hex(password).equals(m.getPassword())) {
@@ -111,13 +102,12 @@ public class MemberServiceImpl implements MemberService {
 					record.setIsLocked(1);// 错误5次直接锁住
 				}
 				memberMapper.updateByPrimaryKeySelective(record);
-
 				resp.setFacade(ResultEnum.PASSWORD_ERROR);
 				return resp;
 			}
 			// 验证码输入有误
 			if (null != captcha && !"".equals(captcha)) {
-				if (!captchaValidate) {
+				if (!captchaService.isValid(captchaId, captcha)) {
 					resp.setFacade(ResultEnum.VALIDATECODE_ERROR);
 					return resp;
 				}
