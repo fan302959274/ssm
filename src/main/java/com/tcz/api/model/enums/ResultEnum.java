@@ -15,7 +15,8 @@ public enum ResultEnum {
 			"此帐号未激活，请与客服联系！"), ACCOUNT_FREEZE("100005", "帐号已冻结",
 			"帐号已冻结，请与客服联系！"), PASSWORD_LOCKED_FIVEMIN("100006", "密码被锁定",
 			"失败次数超限，被冻结5分钟！"), PASSWORD_LOCKED("100007", "密码被锁定",
-			"密码被系统锁定，请与客服联系！"),
+			"密码被系统锁定，请与客服联系！"), VALIDATECODE_ERROR("100008", "验证码错误",
+			"验证码输入有误！"),
 	// 注册相关
 	REGISTER_ERROR("200000", "注册异常", "注册失败！"), ACCOUNT_REGISTERED("200001",
 			"帐号已注册", "您的帐号已注册");
