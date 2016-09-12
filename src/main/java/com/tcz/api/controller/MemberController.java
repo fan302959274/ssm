@@ -3,12 +3,17 @@ package com.tcz.api.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tcz.api.model.enums.ResultEnum;
+import com.tcz.api.service.CaptchaService;
 import com.tcz.api.service.MemberService;
 import com.tcz.api.utils.ResponseUtil;
 import com.tcz.core.rest.Message;
@@ -27,6 +32,9 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	CaptchaService captchaService;
 
 	/**
 	 * 会员注册
@@ -51,8 +59,17 @@ public class MemberController {
 	 */
 
 	@RequestMapping("/login")
-	public ResponseUtil<Map<String, Object>> login(String account,
-			String password) {
+	public ResponseUtil<Map<String, Object>> login(HttpServletRequest request,String account,
+			String password,String captcha) {
+		ResponseUtil<Map<String, Object>> resp = new ResponseUtil<Map<String,Object>>();
+		String captchaId = request.getSession().getId();
+		if(null!=captcha&&!"".equals(captcha)){
+			if(!captchaService.isValid(captchaId, captcha)){
+				resp.setFacade(ResultEnum.VALIDATECODE_ERROR);
+				return resp;
+			}	
+		}
+		
 		return memberService.login(account, password);
 	}
 
