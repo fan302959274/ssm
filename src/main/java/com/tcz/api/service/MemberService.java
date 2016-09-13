@@ -3,6 +3,7 @@ package com.tcz.api.service;
 import java.util.List;
 import java.util.Map;
 
+import com.tcz.api.model.po.Member;
 import com.tcz.api.utils.ResponseUtil;
 
 /**
@@ -17,7 +18,7 @@ public interface MemberService {
 	 * @param id
 	 * @return
 	 */
-	ResponseUtil<List<Map<String, Object>>> selectYunRecord(Long id);
+	ResponseUtil<List<Map<String, Object>>> selectYunRecord(Long id,String status);
 
 	/**
 	 * 获得的商品
@@ -34,7 +35,7 @@ public interface MemberService {
 	 * @param password
 	 * @return
 	 */
-	ResponseUtil<Map<String, Object>> login(String account, String password,String captcha,String captchaId);
+	ResponseUtil<Member> login(String account, String password,String captcha,String captchaId);
 
 	/**
 	 * 注册

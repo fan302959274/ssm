@@ -1,19 +1,20 @@
 package com.tcz.api.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tcz.api.model.enums.ResultEnum;
-import com.tcz.api.service.CaptchaService;
+import com.tcz.api.model.po.Member;
 import com.tcz.api.service.MemberService;
 import com.tcz.api.utils.ResponseUtil;
 import com.tcz.core.rest.Message;
@@ -56,20 +57,36 @@ public class MemberController {
 	 */
 
 	@RequestMapping("/login")
-	public ResponseUtil<Map<String, Object>> login(HttpServletRequest request,String account,
+	public ResponseUtil<Member> login(HttpServletRequest request,String account,
 			String password,String captcha) {
-		String captchaId = request.getSession().getId();
-		return memberService.login(account, password,captcha,captchaId);
+		ResponseUtil<Member> resp = new  ResponseUtil<Member>();
+		HttpSession session = request.getSession();
+		String captchaId = session.getId();
+		resp = memberService.login(account, password,captcha,captchaId);
+		//设置登录用户session
+		if(null!=resp&&null!=resp.getResult()){
+			session.setAttribute("user", resp.getResult());
+		}
+		return resp;
 	}
 
 	/**
 	 * 云购记录
-	 * 
+	 * @param 商品状态:status
 	 * @return
 	 */
 	@RequestMapping("/yunRecord")
-	public ResponseUtil<List<Map<String, Object>>> yunRecord() {
-		return memberService.selectYunRecord(1l);
+	public ResponseUtil<List<Map<String, Object>>> yunRecord(HttpServletRequest request,String status) {
+		HttpSession session = request.getSession();
+		Object userO = session.getAttribute("user");
+		if(null!=userO){
+			Member m = (Member) userO;
+			return memberService.selectYunRecord(m.getId(),status);
+		}else{
+			log.info("用户未登录!");
+		}
+		return null;
+		
 	}
 
 	/**
