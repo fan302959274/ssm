@@ -375,7 +375,7 @@
 		where id = #{id,jdbcType=BIGINT}
 	</update>
 
-	<select id="selectYunRecord" parameterType="java.lang.Long"
+	<select id="selectYunRecord" parameterType="java.util.Map"
 		resultType="java.util.Map">
 		SELECT
 		i.image as
@@ -409,8 +409,10 @@
 		m.is_deleted = 0
 		AND
 		o.delete_flag = 0
-		AND m.id =
-		#{id,jdbcType=BIGINT}
+		AND m.id = #{id,jdbcType=BIGINT}
+		<if test="status != '-1'">
+		AND i.status=#{status,jdbcType=VARCHAR}
+		</if>
 	</select>
 
 	<select id="productHaving" parameterType="java.lang.Long"
