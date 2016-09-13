@@ -18,7 +18,7 @@ public interface MemberMapper {
 
     int updateByPrimaryKey(Member record);
     
-    List<Map<String, Object>> selectYunRecord(Long id);
+    List<Map<String, Object>> selectYunRecord(Map param);
     
     List<Map<String, Object>> productHaving(Long id);
     

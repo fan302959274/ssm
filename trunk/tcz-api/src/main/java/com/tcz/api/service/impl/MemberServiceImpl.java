@@ -1,6 +1,7 @@
 package com.tcz.api.service.impl;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,11 +32,14 @@ public class MemberServiceImpl implements MemberService {
 	CaptchaService captchaService;
 
 	@Override
-	public ResponseUtil<List<Map<String, Object>>> selectYunRecord(Long id) {
+	public ResponseUtil<List<Map<String, Object>>> selectYunRecord(Long id,String status) {
 		ResponseUtil<List<Map<String, Object>>> resp = new ResponseUtil<List<Map<String, Object>>>();
 		try {
+			HashMap<String, Object> param = new HashMap<String, Object>();
+			param.put("id", id);
+			param.put("status", status);
 			List<Map<String, Object>> yunRecordList = memberMapper
-					.selectYunRecord(id);
+					.selectYunRecord(param);
 			if (null != yunRecordList && yunRecordList.size() > 0) {
 				resp.setResult(yunRecordList);
 			}
@@ -48,9 +52,9 @@ public class MemberServiceImpl implements MemberService {
 
 	/** 帐号未不存在、验证码错误、登录密码错误、帐号已被冻结、此账号未激活、密码被系统锁定、失败次数超限，被冻结5分钟、失败次数超限，IP被冻结 */
 	@Override
-	public ResponseUtil<Map<String, Object>> login(String account,
+	public ResponseUtil<Member> login(String account,
 			String password, String captcha, String captchaId) {
-		ResponseUtil<Map<String, Object>> resp = new ResponseUtil<Map<String, Object>>();
+		ResponseUtil<Member> resp = new ResponseUtil<Member>();
 		Member member = new Member();
 		try {
 			if (RegexUtils.isEmail(account)) {
@@ -119,7 +123,7 @@ public class MemberServiceImpl implements MemberService {
 			record.setLoginDate(new Date());
 			memberMapper.updateByPrimaryKeySelective(record);
 
-			resp.setResult(BeanUtils.beanToMap(m));
+			resp.setResult(m);
 		} catch (Exception e) {
 			log.info("登录异常" + e.getMessage());
 			resp.setFacade(ResultEnum.LOGIN_ERROR);
