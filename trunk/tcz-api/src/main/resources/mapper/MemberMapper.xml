@@ -379,45 +379,55 @@
 		resultType="java.util.Map">
 		SELECT
 		i.image as
-		image,i.name as name,i.status as status,
-		enter.enterCount
+		image,i.name as name,i.status as
+		status,i.price as price,o.id as orderId,
+		enter.enterCount as enterCount
 		FROM
 		tcz_member
 		m
 		LEFT JOIN tcz_order o ON m.id =
 		o.member_id
-		LEFT JOIN tcz_order_detail
+		LEFT JOIN
+		tcz_order_detail
 		od ON o.id = od.order_id
 		LEFT JOIN
-		tcz_item i ON od.item_id = i.id
+		tcz_item i ON
+		od.item_id = i.id
 		LEFT
 		JOIN (
 		SELECT
 		oo.item_id,
-		count(oo.item_id) AS enterCount
+		count(oo.item_id) AS
+		enterCount
 		FROM
 		tcz_order_detail oo
 		GROUP BY
 		oo.item_id
-		) enter ON i.id = enter.item_id
+		) enter ON i.id =
+		enter.item_id
 		WHERE
 		m.is_deleted = 0
 		AND
 		o.delete_flag = 0
-		AND m.id = #{id,jdbcType=BIGINT}
+		AND m.id =
+		#{id,jdbcType=BIGINT}
 	</select>
 
 	<select id="productHaving" parameterType="java.lang.Long"
 		resultType="java.util.Map">
 		select i.image as
 		image,i.name as name,o.sn as sn
-		from tcz_member m
+		from
+		tcz_member m
 		left join tcz_order o on m.id = o.member_id
-		left join tcz_order_detail od on od.order_id = o.id
-		left join tcz_item i on od.item_id = i.id
+		left join
+		tcz_order_detail od on od.order_id = o.id
+		left join tcz_item i on
+		od.item_id = i.id
 		where m.is_deleted = 0
 		and o.delete_flag = 0
-		and od.delete_flag = 0
+		and
+		od.delete_flag = 0
 		AND m.id = #{id,jdbcType=BIGINT}
 	</select>
 
