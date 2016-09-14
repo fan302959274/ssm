@@ -6,6 +6,9 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionContext;
+import javax.servlet.http.HttpSessionListener;
+import javax.websocket.Session;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +17,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonObjectFormatVisitor;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.tcz.api.model.po.Member;
 import com.tcz.api.service.MemberService;
 import com.tcz.api.utils.ResponseUtil;
@@ -65,7 +71,7 @@ public class MemberController {
 		resp = memberService.login(account, password,captcha,captchaId);
 		//设置登录用户session
 		if(null!=resp&&null!=resp.getResult()){
-			session.setAttribute("user", resp.getResult());
+			session.setAttribute("user", JSONObject.toJSON(resp.getResult()));
 		}
 		return resp;
 	}
@@ -78,10 +84,10 @@ public class MemberController {
 	@RequestMapping("/yunRecord")
 	public ResponseUtil<List<Map<String, Object>>> yunRecord(HttpServletRequest request,String status) {
 		HttpSession session = request.getSession();
-		Object userO = session.getAttribute("user");
+		String str = session.getId();
+		JSONObject userO = (JSONObject) session.getAttribute("user");
 		if(null!=userO){
-			Member m = (Member) userO;
-			return memberService.selectYunRecord(m.getId(),status);
+			return memberService.selectYunRecord(userO.getLong("id"),status);
 		}else{
 			log.info("用户未登录!");
 		}
