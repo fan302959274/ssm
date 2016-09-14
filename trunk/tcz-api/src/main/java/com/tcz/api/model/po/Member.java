@@ -1,9 +1,12 @@
 package com.tcz.api.model.po;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Member {
+import com.fasterxml.jackson.databind.ser.std.SerializableSerializer;
+
+public class Member implements Serializable{
     private Long id;
 
     private Date createDate;
