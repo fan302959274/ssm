@@ -84,7 +84,6 @@ public class MemberController {
 	@RequestMapping("/yunRecord")
 	public ResponseUtil<List<Map<String, Object>>> yunRecord(HttpServletRequest request,String status) {
 		HttpSession session = request.getSession();
-		String str = session.getId();
 		JSONObject userO = (JSONObject) session.getAttribute("user");
 		if(null!=userO){
 			return memberService.selectYunRecord(userO.getLong("id"),status);
