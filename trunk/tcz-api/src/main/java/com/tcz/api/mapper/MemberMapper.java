@@ -20,7 +20,7 @@ public interface MemberMapper {
     
     List<Map<String, Object>> selectYunRecord(Map param);
     
-    List<Map<String, Object>> productHaving(Long id);
+    List<Map<String, Object>> productHaving(Map param);
     
     Member getMemberByAccount(Member member);
 }
