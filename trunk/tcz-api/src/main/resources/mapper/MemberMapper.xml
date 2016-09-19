@@ -410,15 +410,15 @@
 		AND
 		o.delete_flag = 0
 		AND m.id = #{id,jdbcType=BIGINT}
-		<if test="status != '-1'">
+		<if test="status!=null and status != '-1'">
 		AND i.status=#{status,jdbcType=VARCHAR}
 		</if>
 	</select>
 
-	<select id="productHaving" parameterType="java.lang.Long"
+	<select id="productHaving" parameterType="java.util.Map"
 		resultType="java.util.Map">
 		select i.image as
-		image,i.name as name,o.sn as sn
+		image,i.name as name,i.price as price,o.id as orderId,o.sn as sn
 		from
 		tcz_member m
 		left join tcz_order o on m.id = o.member_id
@@ -431,6 +431,9 @@
 		and
 		od.delete_flag = 0
 		AND m.id = #{id,jdbcType=BIGINT}
+		<if test="status!=null and status != '-1'">
+		AND i.status=#{status,jdbcType=VARCHAR}
+		</if>
 	</select>
 
 
