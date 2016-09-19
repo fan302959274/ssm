@@ -169,11 +169,14 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public ResponseUtil<List<Map<String, Object>>> productHaving(Long id) {
+	public ResponseUtil<List<Map<String, Object>>> productHaving(Long id,String status) {
 		ResponseUtil<List<Map<String, Object>>> resp = new ResponseUtil<List<Map<String, Object>>>();
 		try {
+			HashMap<String, Object> param = new HashMap<String, Object>();
+			param.put("id", id);
+			param.put("status", status);
 			List<Map<String, Object>> yunRecordList = memberMapper
-					.productHaving(id);
+					.productHaving(param);
 			if (null != yunRecordList && yunRecordList.size() > 0) {
 				resp.setResult(yunRecordList);
 			}
