@@ -26,7 +26,7 @@ public interface MemberService {
 	 * @param id
 	 * @return
 	 */
-	ResponseUtil<List<Map<String, Object>>> productHaving(Long id);
+	ResponseUtil<List<Map<String, Object>>> productHaving(Long id,String status);
 
 	/**
 	 * 登录
