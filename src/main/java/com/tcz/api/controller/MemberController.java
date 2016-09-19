@@ -100,8 +100,16 @@ public class MemberController {
 	 * @return
 	 */
 	@RequestMapping("/productHaving")
-	public ResponseUtil<List<Map<String, Object>>> productHaving() {
-			return  memberService.productHaving(1l);
+	public ResponseUtil<List<Map<String, Object>>> productHaving(HttpServletRequest request,String status) {
+		HttpSession session = request.getSession();
+		JSONObject userO = (JSONObject) session.getAttribute("user");
+		if(null!=userO){
+			return  memberService.productHaving(userO.getLong("id"),status);
+		}else{
+			log.info("用户未登录!");
+		}
+		return null;
+			
 	}
 
 	/**
